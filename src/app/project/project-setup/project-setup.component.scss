@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+.flex-container {
+  @include flex(row, space-between);
+  column-gap: 2rem;
+}
+
+.form-control.needles {
+  // display: inline;
+  width: 12rem;
+}
+
+article {
+  width: 45%;
+}
+
+.results-container {
+  h3 {
+    text-align: center;
+  }
+}

@@ -1,3 +1,116 @@
-<p>
-  project-setup works!
-</p>
+<div class="flex-container">
+  <article class="form-container">
+    <h2>{{title}}</h2>
+    <p>Fill in the form to set up the basics of sweater construction</p>
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+
+      <fieldset>
+        <div class="form-group">
+          <label class="custom-control custom-radio">
+            <input class="custom-control-input" [(ngModel)]="isMetric" name="isMetric" type="radio" [value]="true"
+              checked="">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Metric</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input class="custom-control-input" [(ngModel)]="isMetric" name="isMetric" type="radio" [value]="false">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Imperial</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input class="form-control" type="text" [(ngModel)]="sweater.name" name="projectName" [value]="" required>
+        </div>
+      </fieldset>
+
+      <fieldset *ngIf="defaultsLoaded">
+        <legend>Guage</legend>
+        <div class="form-group">
+          <label for="needles">Needles Size</label>
+          <select class="form-control needles" [(ngModel)]="sweater.guage.needles[0]" name="needlesMM" required>
+            <option *ngFor="let value of needleConversion; let i = index" value="{{value[0]}}">{{value[0]}}mm
+              ({{value[1]}} US / {{value[2]}} UK)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="guageStitches">Stitches per {{isMetric ? '10 cm' : '4 inches'}}</label>
+          <input class="form-control" [(ngModel)]="sweater.guage.stitches" name="guageStiches" type="number">
+          <small class="form-text text-muted">The number of stitches horizontally over {{isMetric ? '10 cm' : '4
+            inches'}}</small>
+          <label for="guageRows">Rows per {{isMetric ? '10 cm' : '4 inches'}}</label>
+          <input class="form-control" [(ngModel)]="sweater.guage.rows" name="guageRows" type="number">
+          <small class="form-text text-muted">The number of rows vertically over {{isMetric ? '10 cm' : '4 inches'}}</small>
+        </div>
+      </fieldset>
+
+      <fieldset *ngIf="defaultsLoaded">
+        <legend>Measurements</legend>
+        <div class="form-group">
+          <label class="custom-control custom-radio">
+            <input class="custom-control-input" [(ngModel)]="isStandard" name="isStandard" type="radio" [value]="true"
+              checked="">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Standard Sizes</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input class="custom-control-input" [(ngModel)]="isStandard" name="isStandard" type="radio" [value]="false">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Custom Size</span>
+          </label>
+          <small class="form-text text-muted">Standard Size pattern includes Men's, Women's & Children's Sizes. Custom
+            Size pattern creates a unique pattern for a custom size.</small>
+        </div>
+        <div class="form-group">
+          <label for="projectName">Chest</label>
+          <input class="form-control" type="number" [disabled]="isStandard" name="measureChest">
+          <small class="form-text text-muted">Measure the circumference of the torso at the underarms.</small>
+          <label for="projectName">Torso Length</label>
+          <input class="form-control" type="number" [disabled]="isStandard" name="measureTorso">
+          <small class="form-text text-muted">Measure the length of the torso from bottom of sweater to underarms.</small>
+          <label for="projectName">Sleeve Length</label>
+          <input class="form-control" type="number" [disabled]="isStandard" name="measureSleeve">
+          <small class="form-text text-muted">Measure the length of the sleeve from cuff to underarms.</small>
+        </div>
+
+      </fieldset>
+    </form>
+  </article>
+
+  <!-- ************* Output ************** ************* Output ************** ************* Output ************** -->
+
+  <article class="results-container" *ngIf="defaultsLoaded">
+    <h3>{{sweater.name}}</h3>
+    <ul class="list-group">
+      <li class="list-group-item justify-content-between align-items-center">
+        Units of measurment: <strong>{{ isMetric ? 'cm' : 'inches' }}</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Needles Size: <strong>{{sweater.guage.needles[0]}}mm ({{sweater.guage.needles[1]}}
+          US/{{sweater.guage.needles[2]}} UK)</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Swatch: <strong>{{isMetric ? '10 cm' : '4 inches'}} x {{isMetric ? '10 cm' : '4 inches'}}</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Guage: <strong>{{sweater.guage.stitches}} stitches across {{sweater.guage.rows}} rows</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Custom or Standard Measurements: <strong>{{isStandard ? 'Standard' : 'Custom '}}</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Chest Measurements: <strong>{{getMeasurements('chest')}}</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Torso Length Measurements: <strong>{{getMeasurements('torso')}}</strong>
+      </li>
+      <li class="list-group-item justify-content-between align-items-center">
+        Sleeve Length Measurements: <strong>{{getMeasurements('sleeve')}}</strong>
+      </li>
+
+
+    </ul>
+
+  </article>
+</div>

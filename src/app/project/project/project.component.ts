@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'knit-project',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
+    this.getProject('prj000');
   }
 
+  getProject(id) {
+    // console.log(this.projectService.getProject(id));
+    console.log('ProjectComponent.getProject() has fired');
+  }
 }
