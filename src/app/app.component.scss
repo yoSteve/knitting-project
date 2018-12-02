@@ -4,16 +4,12 @@
 .grid-container {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  height: 100vh;
-  app-header {
-    grid-row: 1;
-  }
-  section {
-    grid-row: 2;
+  min-height: 100vh;
+
+  main {
     @extend %container;
   }
-  app-footer {
-    grid-row: 3;
-  }
+
+
 }
 

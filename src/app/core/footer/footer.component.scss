@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'mixins';
+@import 'layout';
+
+footer {
+  @include flex(row, space-between);
+  @extend %container;
+  color: $white;
+  background-color: $primary;
+  
+  .social {
+    @include flex(row, space-between);
+    a {
+      margin: 0 0.75rem;
+    }
+  }
+}
