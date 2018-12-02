@@ -41,3 +41,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# extras
+PROJECT_DESCRIPTION.txt
+Lopi_Pattern.pdf
