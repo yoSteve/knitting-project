@@ -1,0 +1,42 @@
+@import 'variables';
+@import 'mixins';
+@import 'layout';
+
+header {
+  @extend %container;
+  display: grid;
+  // grid-template-columns: 2fr 4fr 2fr;
+  background-color: $primary;
+  color: $white;
+  justify-content: flex-start;
+
+  h1 {
+    margin-bottom: 0;
+    grid-column: 1;
+  }
+
+  ul {
+    @include flex(row, space-evenly);
+    grid-column: 2;
+    margin-left: 1.5rem;
+  }
+
+  li {
+    @include flex(column, flex-end);
+    justify-content: flex-end;
+    margin: 0 0.5rem;
+    color: $white;
+    &.active {
+      a {
+        color: $success;
+      }
+    }
+    a {
+      color: $white;
+      transition: 250ms;
+      &:hover {
+        color: darken($success, 15%);
+      }
+    }
+  }
+}

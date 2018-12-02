@@ -28,17 +28,10 @@
   }
 }
 
-// Add percentage of white to a color
-@function tint($color, $percent) {
-  @return mix(white, $color, $percent);
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
 }
 
-// Add percentage of black to a color
-@function shade($color, $percent) {
-  @return mix(black, $color, $percent);
-}
-
-// Blend one color into another
-@function blend($color1, $color2, $percent) {
-  @return mix($color1, $color2, $percent);
-}

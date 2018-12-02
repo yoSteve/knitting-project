@@ -28,3 +28,18 @@
 @function font($path, $base: $base-url) {
   @return asset($base, 'fonts/', $path);
 }
+
+// Add percentage of white to a color
+@function tint($color, $percent) {
+  @return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent) {
+  @return mix(black, $color, $percent);
+}
+
+// Blend one color into another
+@function blend($color1, $color2, $percent) {
+  @return mix($color1, $color2, $percent);
+}

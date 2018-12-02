@@ -1,0 +1,7 @@
+$container-padding-top: 1rem;
+$container-padding-sides: 5%;
+$container-padding-bottom: 1rem;
+
+%container {
+  padding: $container-padding-top $container-padding-sides $container-padding-bottom;
+}
