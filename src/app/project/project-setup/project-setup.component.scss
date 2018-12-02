@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .flex-container {
-  @include flex(row, space-between);
+  @include flex(row, space-between, flex-start);
   column-gap: 2rem;
 }
 
