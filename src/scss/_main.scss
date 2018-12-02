@@ -2,13 +2,15 @@
 
 // 1. Configuration and helpers
 @import
+  'vendor/bootswatch/variables',
   'abstracts/variables',
   'abstracts/functions',
   'abstracts/mixins';
 
 // 2. Vendors
 @import
-  'vendor/normalize';
+  'vendor/boostrap/bootstrap',
+  'vendor/bootswatch/bootswatch';
 
 // 3. Base stuff
 @import

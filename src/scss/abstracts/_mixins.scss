@@ -1,5 +1,10 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
+// Mixins are like Placeholders in that they are reusable code snippets.
+// Unlike placeholders they can take arguments.
+// Naming Convention: @mixin mixinName ($args)
+// call it inside your CSS selector with '@include mixinName(args);'.
+
 // -----------------------------------------------------------------------------
 
 /// Event wrapper
@@ -23,12 +28,17 @@
   }
 }
 
-/// Make a context based selector a little more friendly
-/// @author Hugo Giraudel
-/// @param {String} $context
-@mixin when-inside($context) {
-  #{$context} & {
-    @content;
-  }
+// Add percentage of white to a color
+@function tint($color, $percent) {
+  @return mix(white, $color, $percent);
 }
 
+// Add percentage of black to a color
+@function shade($color, $percent) {
+  @return mix(black, $color, $percent);
+}
+
+// Blend one color into another
+@function blend($color1, $color2, $percent) {
+  @return mix($color1, $color2, $percent);
+}
