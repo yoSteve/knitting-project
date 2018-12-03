@@ -3,6 +3,7 @@ import { PROJECTS } from '@app/_data/project.data';
 import { Project } from './project.type';
 import { NEEDLE_SIZES } from '@app/_data/needle-sizes.data';
 import { Defaults, LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +15,23 @@ export class ProjectService {
   constructor() {
   }
 
-  getProject(id): Promise<Project> {
+  getProject(id): Observable<Project> {
     let foundProject;
     PROJECTS.forEach(project => {
       if (project.id === id) { foundProject = project; }
     });
-    return Promise.resolve(foundProject);
+    return of(foundProject);
   }
 
-  getDefaults(type): Promise<Defaults> {
+  getDefaults(type): Observable<Defaults> {
     // switch (type) {
     //   case 'lopi':
-    return Promise.resolve(LOPI_DEFAULTS);
+    return of(LOPI_DEFAULTS);
     // }
   }
 
-  getNeedles() {
-    return this.needles;
+  getNeedles(): Observable<any[]> {
+    return of(this.needles);
   }
 
 } // end class
