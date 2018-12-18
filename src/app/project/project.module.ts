@@ -5,13 +5,14 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project/project.component';
 import { ProjectSetupComponent } from './project-setup/project-setup.component';
 import { PatternInstructionsComponent } from './pattern-instructions/pattern-instructions.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProjectComponent, ProjectSetupComponent, PatternInstructionsComponent],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ProjectRoutingModule
   ]
 })
