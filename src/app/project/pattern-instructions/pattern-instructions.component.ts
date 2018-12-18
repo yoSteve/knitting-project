@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../project.type';
 import { ProjectService } from '../project.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'knit-pattern-instructions',
@@ -45,8 +46,10 @@ export class PatternInstructionsComponent implements OnInit {
 
   getProject(id) {
     this.projectService.getProject(id)
-      .then(proj => this.project = proj)
-      .then(() => {
+      .pipe(
+        tap(proj => this.project = proj)
+      )
+      .subscribe(() => {
         this.mainNeedle = this.project.guage.needles;
         // this.chestMeasurments = this.project.measurements.chest;
       });

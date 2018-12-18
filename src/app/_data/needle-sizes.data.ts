@@ -6,7 +6,7 @@ export const NEEDLE_SIZES: any[] = [
   [3.5, 4, '-'],
   [3.75, 5, 9],
   [4, 6, 8],
-  [4.5, 7, 7, true], // default needle for pattern/guage
+  [4.5, 7, 7], // index 4: default needle for pattern/guage
   [5, 8, 6],
   [5.5, 9, 5],
   [6, 10, 4]

@@ -7,61 +7,104 @@
       <fieldset>
         <div class="form-group">
           <label class="custom-control custom-radio">
-            <input class="custom-control-input" [(ngModel)]="isMetric" name="isMetric" type="radio" [value]="true"
-              checked="">
-            <span class="custom-control-indicator"></span>
+            <input 
+              class="custom-control-input"
+              [formControl]="isMetric"
+              name="isMetric"
+              type="radio"
+              [value]="true">
             <span class="custom-control-description">Metric</span>
           </label>
+
           <label class="custom-control custom-radio">
-            <input class="custom-control-input" [(ngModel)]="isMetric" name="isMetric" type="radio" [value]="false">
-            <span class="custom-control-indicator"></span>
+            <input class="custom-control-input"
+              [formControl]="isMetric"
+              name="isMetric"
+              type="radio"
+              [value]="false">
             <span class="custom-control-description">Imperial</span>
           </label>
         </div>
 
         <div class="form-group">
           <label for="projectName">Project Name</label>
-          <input class="form-control" type="text" [(ngModel)]="sweater.name" name="projectName" [value]="" required>
+          <input 
+            class="form-control"
+            type="text"
+            [formControl]="projectName"
+            name="projectName"
+          >
         </div>
       </fieldset>
 
       <fieldset *ngIf="defaultsLoaded">
         <legend>Guage</legend>
         <div class="form-group">
+
           <label for="needles">Needles Size</label>
-          <select class="form-control needles" [(ngModel)]="sweater.guage.needles[0]" name="needlesMM" required>
-            <option *ngFor="let value of needleConversion; let i = index" value="{{value[0]}}">{{value[0]}}mm
-              ({{value[1]}} US / {{value[2]}} UK)</option>
+          <select
+            class="form-control needles"
+            [formControl]="needlesControl"
+            name="needlesMM"
+          >
+            <option
+              *ngFor="let value of needleConversion | async" 
+              [value]="value"
+              >
+              {{value[0]}}mm ({{value[1]}} US / {{value[2]}} UK)
+            </option>
           </select>
+          value: {{guageNeedles | json}}
         </div>
+
         <div class="form-group">
-          <label for="guageStitches">Stitches per {{isMetric ? '10 cm' : '4 inches'}}</label>
+
+          <label for="guageStitches">Stitches per {{isMetric.value ? '10 cm' : '4 inches'}}</label>
           <input class="form-control" [(ngModel)]="sweater.guage.stitches" name="guageStiches" type="number">
-          <small class="form-text text-muted">The number of stitches horizontally over {{isMetric ? '10 cm' : '4
+
+          <small class="form-text text-muted">The number of stitches horizontally over {{isMetric.value ? '10 cm' : '4
             inches'}}</small>
-          <label for="guageRows">Rows per {{isMetric ? '10 cm' : '4 inches'}}</label>
+
+          <label for="guageRows">Rows per {{isMetric.value ? '10 cm' : '4 inches'}}</label>
           <input class="form-control" [(ngModel)]="sweater.guage.rows" name="guageRows" type="number">
-          <small class="form-text text-muted">The number of rows vertically over {{isMetric ? '10 cm' : '4 inches'}}</small>
+
+          <small class="form-text text-muted">The number of rows vertically over {{isMetric.value ? '10 cm' : '4 inches'}}</small>
         </div>
       </fieldset>
 
       <fieldset *ngIf="defaultsLoaded">
+
         <legend>Measurements</legend>
+
         <div class="form-group">
           <label class="custom-control custom-radio">
-            <input class="custom-control-input" [(ngModel)]="isStandard" name="isStandard" type="radio" [value]="true"
-              checked="">
+            <input 
+              type="radio"
+              class="custom-control-input"
+              [formControl]="isStandard"
+              name="isStandard"
+              [value]="true"
+            >
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Standard Sizes</span>
           </label>
+
           <label class="custom-control custom-radio">
-            <input class="custom-control-input" [(ngModel)]="isStandard" name="isStandard" type="radio" [value]="false">
+            <input
+              type="radio"
+              class="custom-control-input"
+              [formControl]="isStandard"
+              name="isStandard"
+              [value]="false"
+              >
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Custom Size</span>
           </label>
+
           <small class="form-text text-muted">Standard Size pattern includes Men's, Women's & Children's Sizes. Custom
             Size pattern creates a unique pattern for a custom size.</small>
         </div>
+
         <div class="form-group">
           <label for="projectName">Chest</label>
           <input class="form-control" type="number" [disabled]="isStandard" name="measureChest">
@@ -81,23 +124,23 @@
   <!-- ************* Output ************** ************* Output ************** ************* Output ************** -->
 
   <article class="results-container" *ngIf="defaultsLoaded">
-    <h3>{{sweater.name}}</h3>
+    <h3>{{ projectName.value }}</h3>
     <ul class="list-group">
       <li class="list-group-item justify-content-between align-items-center">
-        Units of measurment: <strong>{{ isMetric ? 'cm' : 'inches' }}</strong>
+        Units of measurment: <strong>{{ isMetric.value ? 'cm' : 'inches' }}</strong>
       </li>
       <li class="list-group-item justify-content-between align-items-center">
-        Needles Size: <strong>{{sweater.guage.needles[0]}}mm ({{sweater.guage.needles[1]}}
-          US/{{sweater.guage.needles[2]}} UK)</strong>
+        Needles Size: <strong>{{ guageNeedles[0] }}mm ({{ guageNeedles[1] }}
+          US/{{ guageNeedles[2] }} UK)</strong>
       </li>
       <li class="list-group-item justify-content-between align-items-center">
-        Swatch: <strong>{{isMetric ? '10 cm' : '4 inches'}} x {{isMetric ? '10 cm' : '4 inches'}}</strong>
+        Swatch: <strong>{{isMetric.value ? '10 cm' : '4 inches'}} x {{isMetric.value ? '10 cm' : '4 inches'}}</strong>
       </li>
       <li class="list-group-item justify-content-between align-items-center">
         Guage: <strong>{{sweater.guage.stitches}} stitches across {{sweater.guage.rows}} rows</strong>
       </li>
       <li class="list-group-item justify-content-between align-items-center">
-        Custom or Standard Measurements: <strong>{{isStandard ? 'Standard' : 'Custom '}}</strong>
+        Custom or Standard Measurements: <strong>{{isStandard.value ? 'Standard' : 'Custom '}}</strong>
       </li>
       <li class="list-group-item justify-content-between align-items-center">
         Chest Measurements: <strong>{{getMeasurements('chest')}}</strong>
