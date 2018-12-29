@@ -4,12 +4,12 @@ import { ProjectService } from '../project.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'knit-project-setup',
-  templateUrl: './project-setup.component.html',
-  styleUrls: ['./project-setup.component.scss']
+  selector: 'knit-project-details',
+  templateUrl: './project-details.component.html',
+  styleUrls: ['./project-details.component.scss']
 })
-export class ProjectSetupComponent implements OnInit, OnChanges {
-  title = 'Project Setup';
+export class ProjectDetailsComponent implements OnInit, OnChanges {
+  title = 'Project Details';
   form = this.projectService.buildProjectForm();
   needleConversion: Observable<any[]>;
   // needleConversion: Observable<any> = this.projectService.getNeedles();
