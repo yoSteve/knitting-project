@@ -12,18 +12,8 @@ export class ProjectSetupComponent implements OnInit, OnChanges {
   title = 'Project Setup';
   form = this.projectService.buildProjectForm();
   needleConversion: Observable<any[]>;
+  // needleConversion: Observable<any> = this.projectService.getNeedles();
   defaultsLoaded = false;
-  sweater = {
-    // name: 'My Sweater',
-    // isMetric: this.isMetric,
-    // guage: this.defaults.guage || {},
-    // measurements: this.defaults.measurements || {}
-    guage: {},
-    measurements: {}
-  };
-
-  // TODO: converting form template based forms to reactive forms.
-  // TODO: set defaults onInit.
 
   constructor(private projectService: ProjectService) {}
 
@@ -57,21 +47,17 @@ export class ProjectSetupComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.needleConversion = this.projectService.getNeedles();
-    this.projectService.getDefaults('lopi')
-      .subscribe(defaults => {
-        this.guage.patchValue(defaults.guage);
-        this.measurements.patchValue(defaults.measurements);
-        this.projectName.patchValue('My Sweater');
-        this.defaultsLoaded = true;
-      });
+    this.projectService.getDefaults('lopi').subscribe(defaults => {
+      this.guage.patchValue(defaults.guage);
+      this.measurements.patchValue(defaults.measurements);
+      this.projectName.patchValue('My Sweater');
+      this.defaultsLoaded = true;
+    });
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() {}
 
   onSubmit() {
     console.log('submitted!');
   }
-
-
 }
