@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
-import { NgForm, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../project.service';
 import { Observable } from 'rxjs';
 
@@ -39,8 +39,16 @@ export class ProjectSetupComponent implements OnInit, OnChanges {
     return this.form.get('name') as FormControl;
   }
 
+  get guage(): FormGroup {
+    return this.form.get('guage') as FormGroup;
+  }
+
+  get measurements(): FormGroup {
+    return this.form.get('measurements') as FormGroup;
+  }
+
   get needlesControl(): FormControl {
-    return this.form.get('guage').get('needles') as FormControl;
+    return this.guage.get('needles') as FormControl;
   }
 
   get guageNeedles(): number[] {
@@ -48,43 +56,22 @@ export class ProjectSetupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('form: ', this.form);
     this.needleConversion = this.projectService.getNeedles();
     this.projectService.getDefaults('lopi')
       .subscribe(defaults => {
-        this.sweater.guage = defaults.guage;
-        this.sweater.measurements = defaults.measurements;
+        this.guage.patchValue(defaults.guage);
+        this.measurements.patchValue(defaults.measurements);
+        this.projectName.patchValue('My Sweater');
         this.defaultsLoaded = true;
       });
   }
 
   ngOnChanges() {
-    console.log('change detected');
-  }
-
-  // TODO: create a shared Conversion service to handle this
-  toInches(cm) {
-    return Math.round(cm * 0.393701);
-  }
-
-  // TODO: create a shared Conversion service to handle this
-  toCm(inches) {
-    return Math.round(inches * 2.54);
   }
 
   onSubmit() {
-    console.log('Submitted!', this.form);
+    console.log('submitted!');
   }
 
-  private getMeasurements(bodyPart) {
-    if (this.isMetric) {
-      return this.sweater.measurements[bodyPart].join(', ') + ' cm';
-    } else {
-      console.log('doing inches');
-      const inches = this.sweater.measurements[bodyPart].map(measurement =>
-        this.toInches(measurement)
-      );
-      return inches.join(', ') + ' inches';
-    }
-  }
+
 }

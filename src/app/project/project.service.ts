@@ -43,8 +43,8 @@ export class ProjectService {
       guage: this.fb.group({
         customGuage: [false],
         needles: ['', Validators.required], // array
-        width: ['', Validators.required],
-        height: ['', Validators.required],
+        width: [10, Validators.required],
+        height: [10, Validators.required],
         stitches: ['', Validators.pattern(/\d+/)],
         rows: ['', Validators.pattern(/\d+/)]
       }),

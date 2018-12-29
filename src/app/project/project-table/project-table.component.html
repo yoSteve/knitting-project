@@ -1,0 +1,29 @@
+<h3>{{ project.name }}</h3>
+<ul class="list-group">
+  <li class="list-group-item justify-content-between align-items-center">
+    Units of measurment: <strong>{{ project.isMetric ? 'cm' : 'inches' }}</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Needles Size: <strong>{{ guage.needles[0] }}mm ({{ guage.needles[1] }}
+      US/{{ guage.needles[2] }} UK)</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Swatch: <strong>{{ project.isMetric ? '10 cm' : '4 inches' }} x {{ project.isMetric ? '10 cm' : '4 inches' }}</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Guage: <strong>{{ guage.stitches }} stitches across {{ guage.rows }} rows</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Custom or Standard Measurements: <strong>{{ measurements.isStandard ? 'Standard' : 'Custom ' }}</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Chest Measurements: <strong>{{ getMeasurements('chest') }}</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Torso Length Measurements: <strong>{{ getMeasurements('torso') }}</strong>
+  </li>
+  <li class="list-group-item justify-content-between align-items-center">
+    Sleeve Length Measurements: <strong>{{ getMeasurements('sleeve') }}</strong>
+  </li>
+
+</ul>

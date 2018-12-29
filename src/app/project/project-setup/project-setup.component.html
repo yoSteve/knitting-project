@@ -1,8 +1,8 @@
 <div class="flex-container">
   <article class="form-container">
-    <h2>{{title}}</h2>
+    <h2>{{ title }}</h2>
     <p>Fill in the form to set up the basics of sweater construction</p>
-    <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <form>
 
       <fieldset>
         <div class="form-group">
@@ -51,24 +51,22 @@
               *ngFor="let value of needleConversion | async" 
               [value]="value"
               >
-              {{value[0]}}mm ({{value[1]}} US / {{value[2]}} UK)
+              {{ value[0] }}mm ({{ value[1] }} US / {{ value[2] }} UK)
             </option>
           </select>
-          value: {{guageNeedles | json}}
-        </div>
+        </div>111
 
         <div class="form-group">
 
-          <label for="guageStitches">Stitches per {{isMetric.value ? '10 cm' : '4 inches'}}</label>
-          <input class="form-control" [(ngModel)]="sweater.guage.stitches" name="guageStiches" type="number">
+          <label for="guageStitches">Stitches per {{ isMetric.value ? '10 cm' : '4 inches' }}</label>
+          <input class="form-control" [formControl]="guage.get('stitches')" name="guageStiches" type="number" min="1">
 
-          <small class="form-text text-muted">The number of stitches horizontally over {{isMetric.value ? '10 cm' : '4
-            inches'}}</small>
+          <small class="form-text text-muted">The number of stitches horizontally over {{ isMetric.value ? '10 cm' : '4 inches' }}</small>
 
-          <label for="guageRows">Rows per {{isMetric.value ? '10 cm' : '4 inches'}}</label>
-          <input class="form-control" [(ngModel)]="sweater.guage.rows" name="guageRows" type="number">
+          <label for="guageRows">Rows per {{ isMetric.value ? '10 cm' : '4 inches' }}</label>
+          <input class="form-control" [formControl]="guage.get('rows')" name="guageRows" type="number" min="1">
 
-          <small class="form-text text-muted">The number of rows vertically over {{isMetric.value ? '10 cm' : '4 inches'}}</small>
+          <small class="form-text text-muted">The number of rows vertically over {{ isMetric.value ? '10 cm' : '4 inches' }}</small>
         </div>
       </fieldset>
 
@@ -121,39 +119,12 @@
     </form>
   </article>
 
-  <!-- ************* Output ************** ************* Output ************** ************* Output ************** -->
-
-  <article class="results-container" *ngIf="defaultsLoaded">
-    <h3>{{ projectName.value }}</h3>
-    <ul class="list-group">
-      <li class="list-group-item justify-content-between align-items-center">
-        Units of measurment: <strong>{{ isMetric.value ? 'cm' : 'inches' }}</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Needles Size: <strong>{{ guageNeedles[0] }}mm ({{ guageNeedles[1] }}
-          US/{{ guageNeedles[2] }} UK)</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Swatch: <strong>{{isMetric.value ? '10 cm' : '4 inches'}} x {{isMetric.value ? '10 cm' : '4 inches'}}</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Guage: <strong>{{sweater.guage.stitches}} stitches across {{sweater.guage.rows}} rows</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Custom or Standard Measurements: <strong>{{isStandard.value ? 'Standard' : 'Custom '}}</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Chest Measurements: <strong>{{getMeasurements('chest')}}</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Torso Length Measurements: <strong>{{getMeasurements('torso')}}</strong>
-      </li>
-      <li class="list-group-item justify-content-between align-items-center">
-        Sleeve Length Measurements: <strong>{{getMeasurements('sleeve')}}</strong>
-      </li>
-
-
-    </ul>
-
+  <article class="results-container">
+    <knit-project-table
+      *ngIf="form.value"
+      [project]="form.value"
+    >
+    </knit-project-table>
   </article>
+
 </div>
