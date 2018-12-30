@@ -2,23 +2,20 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../../project.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { Project } from '@app/project/project.type';
 
 @Component({
-  selector: 'knit-project-details',
-  templateUrl: './project-details.component.html',
-  styleUrls: ['./project-details.component.scss']
+  selector: 'knit-details-form',
+  templateUrl: './details-form.component.html',
+  styleUrls: ['./details-form.component.scss']
 })
-export class ProjectDetailsComponent implements OnInit {
+export class DetailsFormComponent implements OnInit {
   @Input() project: Project;
   form: FormGroup;
   needles: Observable<any[]>;
 
   constructor(
-    private projectService: ProjectService,
-    private route: ActivatedRoute
-  ) {}
+    private projectService: ProjectService) {}
 
   ngOnInit() {
     this.needles = this.projectService.getNeedles();

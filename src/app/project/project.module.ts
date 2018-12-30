@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
-import { ProjectDetailsComponent } from './presentational/project-details/project-details.component';
+import { DetailsFormComponent } from './presentational/details-form/details-form.component';
 import { PatternInstructionsComponent } from './pattern-instructions/pattern-instructions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectTableComponent } from './presentational/project-table/project-table.component';
@@ -13,7 +13,7 @@ import { OverviewComponent } from './overview/overview.component';
 @NgModule({
   declarations: [
     ProjectComponent,
-    ProjectDetailsComponent,
+    DetailsFormComponent,
     PatternInstructionsComponent,
     ProjectTableComponent,
     NewProjectComponent,

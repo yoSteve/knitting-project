@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProjectDetailsComponent } from './project-details.component';
+import { DetailsFormComponent } from './details-form.component';
 import { FormBuilder } from '@angular/forms';
-import { ProjectService } from '../project.service';
+import { ProjectService } from '../../project.service';
 
 const fb = new FormBuilder();
 
-xdescribe('ProjectDetailsComponent', () => {
-  let component: ProjectDetailsComponent;
+xdescribe('DetailsFormComponent', () => {
+  let component: DetailsFormComponent;
   let projectService: ProjectService;
 
   beforeEach(() => {
     projectService = new ProjectService(fb);
-    component = new ProjectDetailsComponent(projectService);
+    component = new DetailsFormComponent(projectService);
   });
 
   afterEach(() => {
