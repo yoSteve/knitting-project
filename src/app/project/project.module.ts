@@ -8,9 +8,17 @@ import { PatternInstructionsComponent } from './pattern-instructions/pattern-ins
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectTableComponent } from './presentational/project-table/project-table.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
-  declarations: [ProjectComponent, ProjectDetailsComponent, PatternInstructionsComponent, ProjectTableComponent, NewProjectComponent],
+  declarations: [
+    ProjectComponent,
+    ProjectDetailsComponent,
+    PatternInstructionsComponent,
+    ProjectTableComponent,
+    NewProjectComponent,
+    OverviewComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,4 +26,4 @@ import { NewProjectComponent } from './new-project/new-project.component';
     ProjectRoutingModule
   ]
 })
-export class ProjectModule { }
+export class ProjectModule {}
