@@ -13,14 +13,10 @@ export class ProjectService {
   projects: Project[] = PROJECTS;
   needles: any[] = NEEDLE_SIZES;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   getProject(id): Observable<Project> {
-    let foundProject;
-    PROJECTS.forEach(project => {
-      if (project.id === id) { foundProject = project; }
-    });
+    const foundProject = PROJECTS.find(project => project.id === id);
     return of(foundProject);
   }
 
@@ -35,26 +31,43 @@ export class ProjectService {
     return of(this.needles);
   }
 
-  buildProjectForm(): FormGroup {
+  buildProjectForm(project: Project): FormGroup {
     return this.fb.group({
-      id: [''],
-      name: ['', Validators.required],
-      isMetric: [true],
+      id: [project.id],
+      name: [project.name, Validators.required],
+      isMetric: [project.isMetric],
       guage: this.fb.group({
-        customGuage: [false],
-        needles: ['', Validators.required], // array
-        width: [10, Validators.required],
-        height: [10, Validators.required],
-        stitches: ['', Validators.pattern(/\d+/)],
-        rows: ['', Validators.pattern(/\d+/)]
+        customGuage: [project.guage.customGuage],
+        needles: [project.guage.needles, Validators.required], // array
+        width: [project.guage.width, Validators.required],
+        height: [project.guage.height, Validators.required],
+        stitches: [project.guage.stitches, Validators.pattern(/\d+/)],
+        rows: [project.guage.rows, Validators.pattern(/\d+/)]
       }),
       measurements: this.fb.group({
-        isStandard: [true],
-        chest: ['', Validators.required], // array
-        torso: ['', Validators.required], // array
-        sleeve: ['', Validators.required] // array
+        isStandard: [project.measurements.isStandard],
+        chest: [
+          {
+            value: project.measurements.chest,
+            disabled: project.measurements.isStandard
+          },
+          Validators.required
+        ], // array
+        torso: [
+          {
+            value: project.measurements.torso,
+            disabled: project.measurements.isStandard
+          },
+          Validators.required
+        ], // array
+        sleeve: [
+          {
+            value: project.measurements.sleeve,
+            disabled: project.measurements.isStandard
+          },
+          Validators.required
+        ] // array
       })
     });
   }
-
 } // end class

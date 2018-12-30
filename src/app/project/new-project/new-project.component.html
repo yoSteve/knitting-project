@@ -1,0 +1,12 @@
+<div *ngIf="!loaded" class="loading">
+  <h3>Loading...</h3>
+</div>
+
+<ng-container *ngIf="loaded">
+
+  <knit-project-details [project]="defaultProject">
+    <h2>{{ title }}</h2>
+    <p>Fill in the form to set up the basics of sweater construction</p>
+  </knit-project-details>
+
+</ng-container>

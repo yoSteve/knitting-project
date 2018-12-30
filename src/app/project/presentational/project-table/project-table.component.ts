@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Project, Guage, Measurements } from '../project.type';
+import { Project, Guage, Measurements } from '../../project.type';
 import { HelpersService } from '@app/shared/services/helpers.service';
 
 @Component({

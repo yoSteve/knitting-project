@@ -1,7 +1,8 @@
 <div class="flex-container">
   <article class="form-container">
-    <h2>{{ title }}</h2>
-    <p>Fill in the form to set up the basics of sweater construction</p>
+    
+    <ng-content></ng-content>
+
     <form>
 
       <fieldset>
@@ -37,7 +38,7 @@
         </div>
       </fieldset>
 
-      <fieldset *ngIf="defaultsLoaded">
+      <fieldset>
         <legend>Guage</legend>
         <div class="form-group">
 
@@ -48,7 +49,7 @@
             name="needlesMM"
           >
             <option
-              *ngFor="let value of needleConversion | async" 
+              *ngFor="let value of needles | async" 
               [value]="value"
               >
               {{ value[0] }}mm ({{ value[1] }} US / {{ value[2] }} UK)
@@ -70,7 +71,7 @@
         </div>
       </fieldset>
 
-      <fieldset *ngIf="defaultsLoaded">
+      <fieldset>
 
         <legend>Measurements</legend>
 
@@ -104,25 +105,28 @@
         </div>
 
         <div class="form-group">
-          <label for="projectName">Chest</label>
-          <input class="form-control" type="number" [disabled]="isStandard" name="measureChest">
+
+          <label for="chest">Chest</label>
+          <input class="form-control" id="chest" name="chest" [formControl]="measurements.get('chest')">
           <small class="form-text text-muted">Measure the circumference of the torso at the underarms.</small>
+          
           <label for="projectName">Torso Length</label>
-          <input class="form-control" type="number" [disabled]="isStandard" name="measureTorso">
+          <input class="form-control" name="torso" id="torso" [formControl]="measurements.get('torso')">
           <small class="form-text text-muted">Measure the length of the torso from bottom of sweater to underarms.</small>
+          
           <label for="projectName">Sleeve Length</label>
-          <input class="form-control" type="number" [disabled]="isStandard" name="measureSleeve">
+          <input class="form-control" name="sleeve" id="sleeve" [formControl]="measurements.get('sleeve')">
           <small class="form-text text-muted">Measure the length of the sleeve from cuff to underarms.</small>
+
         </div>
 
       </fieldset>
     </form>
   </article>
-
   <article class="results-container">
     <knit-project-table
       *ngIf="form.value"
-      [project]="form.value"
+      [project]="form.getRawValue()"
     >
     </knit-project-table>
   </article>
