@@ -3,11 +3,11 @@ import { Project, Guage, Measurements } from '../../project.type';
 import { HelpersService } from '@app/shared/services/helpers.service';
 
 @Component({
-  selector: 'knit-project-table',
-  templateUrl: './project-table.component.html',
-  styleUrls: ['./project-table.component.scss']
+  selector: 'knit-details-table',
+  templateUrl: './details-table.component.html',
+  styleUrls: ['./details-table.component.scss']
 })
-export class ProjectTableComponent {
+export class DetailsTableComponent {
   @Input() project: Project;
 
   constructor(private helpers: HelpersService) { }

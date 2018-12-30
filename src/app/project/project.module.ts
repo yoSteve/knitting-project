@@ -6,7 +6,7 @@ import { ProjectComponent } from './project.component';
 import { DetailsFormComponent } from './presentational/details-form/details-form.component';
 import { PatternInstructionsComponent } from './pattern-instructions/pattern-instructions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectTableComponent } from './presentational/project-table/project-table.component';
+import { DetailsTableComponent } from './presentational/details-table/details-table.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { OverviewComponent } from './overview/overview.component';
 
@@ -15,7 +15,7 @@ import { OverviewComponent } from './overview/overview.component';
     ProjectComponent,
     DetailsFormComponent,
     PatternInstructionsComponent,
-    ProjectTableComponent,
+    DetailsTableComponent,
     NewProjectComponent,
     OverviewComponent
   ],
