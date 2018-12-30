@@ -1,134 +1,162 @@
-<div class="flex-container">
-  <article class="form-container">
-    
-    <ng-content></ng-content>
+<article class="form-container">
+  <ng-content></ng-content>
 
-    <form>
+  <form>
+    <fieldset>
+      <div class="form-group">
+        <label class="custom-control custom-radio">
+          <input
+            class="custom-control-input"
+            [formControl]="isMetric"
+            name="isMetric"
+            type="radio"
+            [value]="true"
+          />
+          <span class="custom-control-description">Metric</span>
+        </label>
 
-      <fieldset>
-        <div class="form-group">
-          <label class="custom-control custom-radio">
-            <input 
-              class="custom-control-input"
-              [formControl]="isMetric"
-              name="isMetric"
-              type="radio"
-              [value]="true">
-            <span class="custom-control-description">Metric</span>
-          </label>
+        <label class="custom-control custom-radio">
+          <input
+            class="custom-control-input"
+            [formControl]="isMetric"
+            name="isMetric"
+            type="radio"
+            [value]="false"
+          />
+          <span class="custom-control-description">Imperial</span>
+        </label>
+      </div>
 
-          <label class="custom-control custom-radio">
-            <input class="custom-control-input"
-              [formControl]="isMetric"
-              name="isMetric"
-              type="radio"
-              [value]="false">
-            <span class="custom-control-description">Imperial</span>
-          </label>
-        </div>
+      <div class="form-group">
+        <label for="projectName">Project Name</label>
+        <input
+          class="form-control"
+          type="text"
+          [formControl]="projectName"
+          name="projectName"
+        />
+      </div>
+    </fieldset>
 
-        <div class="form-group">
-          <label for="projectName">Project Name</label>
-          <input 
-            class="form-control"
-            type="text"
-            [formControl]="projectName"
-            name="projectName"
-          >
-        </div>
-      </fieldset>
+    <fieldset>
+      <legend>Guage</legend>
+      <div class="form-group">
+        <label for="needles">Needles Size</label>
+        <select
+          class="form-control needles"
+          [formControl]="needlesControl"
+          name="needlesMM"
+        >
+          <option *ngFor="let value of (needles | async)" [value]="value">
+            {{ value[0] }}mm ({{ value[1] }} US / {{ value[2] }} UK)
+          </option>
+        </select>
+      </div>
 
-      <fieldset>
-        <legend>Guage</legend>
-        <div class="form-group">
+      <div class="form-group">
+        <label for="guageStitches"
+          >Stitches per {{ isMetric.value ? '10 cm' : '4 inches' }}</label
+        >
+        <input
+          class="form-control"
+          [formControl]="guage.get('stitches')"
+          name="guageStiches"
+          type="number"
+          min="1"
+        />
 
-          <label for="needles">Needles Size</label>
-          <select
-            class="form-control needles"
-            [formControl]="needlesControl"
-            name="needlesMM"
-          >
-            <option
-              *ngFor="let value of needles | async" 
-              [value]="value"
-              >
-              {{ value[0] }}mm ({{ value[1] }} US / {{ value[2] }} UK)
-            </option>
-          </select>
-        </div>
+        <small class="form-text text-muted"
+          >The number of stitches horizontally over
+          {{ isMetric.value ? '10 cm' : '4 inches' }}</small
+        >
 
-        <div class="form-group">
+        <label for="guageRows"
+          >Rows per {{ isMetric.value ? '10 cm' : '4 inches' }}</label
+        >
+        <input
+          class="form-control"
+          [formControl]="guage.get('rows')"
+          name="guageRows"
+          type="number"
+          min="1"
+        />
 
-          <label for="guageStitches">Stitches per {{ isMetric.value ? '10 cm' : '4 inches' }}</label>
-          <input class="form-control" [formControl]="guage.get('stitches')" name="guageStiches" type="number" min="1">
+        <small class="form-text text-muted"
+          >The number of rows vertically over
+          {{ isMetric.value ? '10 cm' : '4 inches' }}</small
+        >
+      </div>
+    </fieldset>
 
-          <small class="form-text text-muted">The number of stitches horizontally over {{ isMetric.value ? '10 cm' : '4 inches' }}</small>
+    <fieldset>
+      <legend>Measurements</legend>
 
-          <label for="guageRows">Rows per {{ isMetric.value ? '10 cm' : '4 inches' }}</label>
-          <input class="form-control" [formControl]="guage.get('rows')" name="guageRows" type="number" min="1">
+      <div class="form-group">
+        <label class="custom-control custom-radio">
+          <input
+            type="radio"
+            class="custom-control-input"
+            [formControl]="isStandard"
+            name="isStandard"
+            [value]="true"
+          />
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Standard Sizes</span>
+        </label>
 
-          <small class="form-text text-muted">The number of rows vertically over {{ isMetric.value ? '10 cm' : '4 inches' }}</small>
-        </div>
-      </fieldset>
+        <label class="custom-control custom-radio">
+          <input
+            type="radio"
+            class="custom-control-input"
+            [formControl]="isStandard"
+            name="isStandard"
+            [value]="false"
+          />
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Custom Size</span>
+        </label>
 
-      <fieldset>
+        <small class="form-text text-muted"
+          >Standard Size pattern includes Men's, Women's & Children's Sizes.
+          Custom Size pattern creates a unique pattern for a custom size.</small
+        >
+      </div>
 
-        <legend>Measurements</legend>
+      <div class="form-group">
+        <label for="chest">Chest</label>
+        <input
+          class="form-control"
+          id="chest"
+          name="chest"
+          [formControl]="measurements.get('chest')"
+        />
+        <small class="form-text text-muted"
+          >Measure the circumference of the torso at the underarms.</small
+        >
 
-        <div class="form-group">
-          <label class="custom-control custom-radio">
-            <input 
-              type="radio"
-              class="custom-control-input"
-              [formControl]="isStandard"
-              name="isStandard"
-              [value]="true"
-            >
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Standard Sizes</span>
-          </label>
+        <label for="projectName">Torso Length</label>
+        <input
+          class="form-control"
+          name="torso"
+          id="torso"
+          [formControl]="measurements.get('torso')"
+        />
+        <small class="form-text text-muted"
+          >Measure the length of the torso from bottom of sweater to
+          underarms.</small
+        >
 
-          <label class="custom-control custom-radio">
-            <input
-              type="radio"
-              class="custom-control-input"
-              [formControl]="isStandard"
-              name="isStandard"
-              [value]="false"
-              >
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Custom Size</span>
-          </label>
-
-          <small class="form-text text-muted">Standard Size pattern includes Men's, Women's & Children's Sizes. Custom
-            Size pattern creates a unique pattern for a custom size.</small>
-        </div>
-
-        <div class="form-group">
-
-          <label for="chest">Chest</label>
-          <input class="form-control" id="chest" name="chest" [formControl]="measurements.get('chest')">
-          <small class="form-text text-muted">Measure the circumference of the torso at the underarms.</small>
-          
-          <label for="projectName">Torso Length</label>
-          <input class="form-control" name="torso" id="torso" [formControl]="measurements.get('torso')">
-          <small class="form-text text-muted">Measure the length of the torso from bottom of sweater to underarms.</small>
-          
-          <label for="projectName">Sleeve Length</label>
-          <input class="form-control" name="sleeve" id="sleeve" [formControl]="measurements.get('sleeve')">
-          <small class="form-text text-muted">Measure the length of the sleeve from cuff to underarms.</small>
-
-        </div>
-
-      </fieldset>
-    </form>
-  </article>
-  <article class="results-container">
-    <knit-details-table
-      *ngIf="form.value"
-      [project]="form.getRawValue()"
-    >
-    </knit-details-table>
-  </article>
-
-</div>
+        <label for="projectName">Sleeve Length</label>
+        <input
+          class="form-control"
+          name="sleeve"
+          id="sleeve"
+          [formControl]="measurements.get('sleeve')"
+        />
+        <small class="form-text text-muted"
+          >Measure the length of the sleeve from cuff to underarms.</small
+        >
+      </div>
+    </fieldset>
+  </form>
+</article>

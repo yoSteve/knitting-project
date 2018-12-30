@@ -1,3 +1,7 @@
-<p>
-  overview works!
-</p>
+<h1>Project Details</h1>
+
+<div *ngIf="!loaded" class="loading">
+  <h3>Loading...</h3>
+</div>
+
+<knit-details-table *ngIf="loaded" [project]="project"></knit-details-table>

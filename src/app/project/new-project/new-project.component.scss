@@ -1,0 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
+.flex-container {
+  @include flex(row, space-between, flex-start);
+}

@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
 export class NewProjectComponent implements OnInit {
   title: 'New Project';
   loaded = false;
-  defaultProject: Project;
+  project: Project;
 
   constructor(private projectService: ProjectService) { }
 
@@ -21,9 +21,13 @@ export class NewProjectComponent implements OnInit {
     this.projectService.getDefaults('lopi')
       .pipe(take(1))
       .subscribe(defaults => {
-        this.defaultProject = this.buildDefaultProject(defaults);
+        this.project = this.buildDefaultProject(defaults);
         this.loaded = true;
       });
+  }
+
+  onValueChanges(project: Project): void {
+    this.project = project;
   }
 
   private buildDefaultProject(defaults: Defaults): Project {

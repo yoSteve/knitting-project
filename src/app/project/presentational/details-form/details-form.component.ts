@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../../project.service';
 import { Observable } from 'rxjs';
@@ -10,9 +10,10 @@ import { Project } from '@app/project/project.type';
   styleUrls: ['./details-form.component.scss']
 })
 export class DetailsFormComponent implements OnInit {
-  @Input() project: Project;
   form: FormGroup;
   needles: Observable<any[]>;
+  @Input() project: Project;
+  @Output() valueChanges = new EventEmitter();
 
   constructor(
     private projectService: ProjectService) {}
@@ -22,6 +23,8 @@ export class DetailsFormComponent implements OnInit {
     this.form = this.projectService.buildProjectForm(this.project);
     this.isStandard.valueChanges
       .subscribe(value => this.onStandardChanges(value));
+    this.form.valueChanges
+      .subscribe(value => this.valueChanges.emit(this.form.getRawValue()));
   }
 
   get isMetric(): FormControl {
