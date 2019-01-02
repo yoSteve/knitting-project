@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
 import { Project } from '../project.type';
-
-import { Defaults } from 'src/app/_data/defaults-lopi.data';
 import { take, delay } from 'rxjs/operators';
 
 @Component({

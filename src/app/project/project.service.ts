@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectService {
   private url = `${ENV.databaseUrl}/projects`;
   public project$ = new BehaviorSubject(null);
+  public project: Project;
   projects: Project[] = PROJECTS;
   needles: any[] = NEEDLE_SIZES;
 
@@ -21,7 +22,10 @@ export class ProjectService {
 
   fetchProject(id): void {
     this.http.get<Project>(`${this.url}/${id}`)
-      .subscribe(data => this.project$.next(data));
+      .subscribe(data => {
+        this.project = data;
+        this.project$.next(data);
+      });
   }
 
   getDefaultProject(type): Observable<Project> {

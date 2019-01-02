@@ -1,9 +1,12 @@
 @import 'variables';
 @import 'mixins';
 
+.flex-container {
+  @include flex(row, space-between, flex-start);
+}
+
 .actions-container {
   @include flex(row, flex-end);
-  padding: 1rem;
 
   &> * {
     margin-left: 0.5rem;

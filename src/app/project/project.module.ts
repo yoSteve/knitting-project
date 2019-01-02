@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsTableComponent } from './presentational/details-table/details-table.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { OverviewComponent } from './overview/overview.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { OverviewComponent } from './overview/overview.component';
     PatternInstructionsComponent,
     DetailsTableComponent,
     NewProjectComponent,
-    OverviewComponent
+    OverviewComponent,
+    EditProjectComponent
   ],
   imports: [
     CommonModule,

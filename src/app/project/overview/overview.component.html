@@ -1,12 +1,22 @@
-<h1>Project Details</h1>
+<h1>{{ title }}</h1>
+
+<ng-container
+*ngIf="project$ | async; else loading">
 
 <knit-details-table
-  *ngIf="project$ | async; else loading"
   [project]="project$ | async"
 ></knit-details-table>
+
+<div class="actions-container">
+  <button class="btn btn-primary" type="button" (click)="onNavigate('print')">View Instructions</button>
+  <button class="btn btn-secondary" type="button" (click)="onNavigate('edit')">Edit</button>
+</div>
+</ng-container>
+
 
 <ng-template #loading>
   <div class="loading">
     <h3>Loading...</h3>
   </div>
 </ng-template>
+

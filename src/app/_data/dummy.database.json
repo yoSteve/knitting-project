@@ -7,7 +7,7 @@
       "is_metric": true,
       "guage": {
         "custom_guage": false,
-        "needles": [4, 7, 7],
+        "needles": [4.5, 7, 7],
         "width": 10,
         "height": 10,
         "stitches": 18,

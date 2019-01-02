@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../project.service';
-import { map, tap, delay } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'knit-overview',
@@ -9,10 +9,12 @@ import { map, tap, delay } from 'rxjs/operators';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
+  title = 'Project Details';
   project$ = this.projectService.project$;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private projectService: ProjectService
   ) {}
 
@@ -26,4 +28,8 @@ export class OverviewComponent implements OnInit {
         this.projectService.fetchProject(id);
       });
   }
-}
+
+  onNavigate(route: string): void {
+    this.router.navigate([route], {relativeTo: this.route});
+  }
+} // end class
