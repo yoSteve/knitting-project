@@ -3,7 +3,7 @@
   [
     {
       "id": "prj000",
-      "name": "Standard Sweater",
+      "name": "Dummy Sweater One",
       "is_metric": true,
       "guage": {
         "custom_guage": false,
@@ -22,7 +22,7 @@
     },
     {
       "id": "prj001",
-      "name": "Custom Sweater",
+      "name": "Dummy Sweater Two",
       "is_metric": false,
       "guage": {
         "custom_guage": false,

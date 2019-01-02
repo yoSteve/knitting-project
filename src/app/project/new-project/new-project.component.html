@@ -1,8 +1,4 @@
-<div *ngIf="!loaded" class="loading">
-  <h3>Loading...</h3>
-</div>
-
-<ng-container *ngIf="loaded">
+<ng-container *ngIf="project; else loading">
 
   <div class="flex-container">
 
@@ -20,3 +16,9 @@
   </div>
 
 </ng-container>
+
+<ng-template #loading>
+  <div class="loading">
+    <h3>Loading...</h3>
+  </div>
+</ng-template>

@@ -3,21 +3,25 @@ import { PROJECTS } from '@app/_data/project.data';
 import { Project } from './project.type';
 import { NEEDLE_SIZES } from '@app/_data/needle-sizes.data';
 import { Defaults, LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment as ENV } from '@environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
+  private url = `${ENV.databaseUrl}/projects`;
+  public project$ = new BehaviorSubject(null);
   projects: Project[] = PROJECTS;
   needles: any[] = NEEDLE_SIZES;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  getProject(id): Observable<Project> {
-    const foundProject = PROJECTS.find(project => project.id === id);
-    return of(foundProject);
+  fetchProject(id): void {
+    this.http.get<Project>(`${this.url}/${id}`)
+      .subscribe(data => this.project$.next(data));
   }
 
   getDefaultProject(type): Observable<Project> {

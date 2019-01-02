@@ -3,7 +3,7 @@ import { ProjectService } from '../project.service';
 import { Project } from '../project.type';
 
 import { Defaults } from 'src/app/_data/defaults-lopi.data';
-import { take } from 'rxjs/operators';
+import { take, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'knit-new-project',
@@ -12,17 +12,18 @@ import { take } from 'rxjs/operators';
 })
 export class NewProjectComponent implements OnInit {
   title: 'New Project';
-  loaded = false;
   project: Project;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     this.projectService.getDefaultProject('lopi')
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        delay(1000)
+        )
       .subscribe(defaultProject => {
         this.project = defaultProject;
-        this.loaded = true;
       });
   }
 

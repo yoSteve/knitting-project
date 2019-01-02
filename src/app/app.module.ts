@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ProjectModule } from './project/project.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ProjectModule } from './project/project.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CoreModule,
     ProjectModule,
     AppRoutingModule // imported last to allow Module routes to be matched first

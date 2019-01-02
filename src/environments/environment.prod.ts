@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   label: 'PRODUCTION',
-  mascot: '🐑'
+  mascot: '🐑',
+  databaseUrl: 'http://localhost:3000'
 };

@@ -10,7 +10,9 @@ export class HeaderComponent implements OnInit {
   routes = [
     { route: '/', name: 'Home' },
     { route: 'project/new', name: 'Project Setup' },
-    { route: 'project/123/print', name: 'Pattern Instructions' }
+    { route: 'project/123/print', name: 'Pattern Instructions' },
+    { route: 'project/prj000/', name: 'Pattern One' },
+    { route: 'project/prj001/', name: 'Pattern Two' }
   ];
 
   constructor() { }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../project.type';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../project.service';
-import { switchMap, map } from 'rxjs/operators';
+import { map, tap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'knit-overview',
@@ -10,21 +9,23 @@ import { switchMap, map } from 'rxjs/operators';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  project: Project;
+  project$ = this.projectService.project$;
   loaded = false;
 
-  constructor(private route: ActivatedRoute, private projectService: ProjectService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit() {
     this.route.params
       .pipe(
+        delay(1000),
         map(params => params.id),
-        switchMap(id => this.projectService.getProject(id))
+        tap(id => this.projectService.fetchProject(id))
       )
-      .subscribe(project => {
-        this.project = project;
+      .subscribe(() => {
         this.loaded = true;
       });
   }
-
 }
