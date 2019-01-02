@@ -7,8 +7,8 @@
         <label class="custom-control custom-radio">
           <input
             class="custom-control-input"
-            [formControl]="isMetric"
-            name="isMetric"
+            [formControl]="is_metric"
+            name="is_metric"
             type="radio"
             [value]="true"
           />
@@ -18,8 +18,8 @@
         <label class="custom-control custom-radio">
           <input
             class="custom-control-input"
-            [formControl]="isMetric"
-            name="isMetric"
+            [formControl]="is_metric"
+            name="is_metric"
             type="radio"
             [value]="false"
           />
@@ -55,7 +55,7 @@
 
       <div class="form-group">
         <label for="guageStitches"
-          >Stitches per {{ isMetric.value ? '10 cm' : '4 inches' }}</label
+          >Stitches per {{ is_metric.value ? '10 cm' : '4 inches' }}</label
         >
         <input
           class="form-control"
@@ -67,11 +67,11 @@
 
         <small class="form-text text-muted"
           >The number of stitches horizontally over
-          {{ isMetric.value ? '10 cm' : '4 inches' }}</small
+          {{ is_metric.value ? '10 cm' : '4 inches' }}</small
         >
 
         <label for="guageRows"
-          >Rows per {{ isMetric.value ? '10 cm' : '4 inches' }}</label
+          >Rows per {{ is_metric.value ? '10 cm' : '4 inches' }}</label
         >
         <input
           class="form-control"
@@ -83,7 +83,7 @@
 
         <small class="form-text text-muted"
           >The number of rows vertically over
-          {{ isMetric.value ? '10 cm' : '4 inches' }}</small
+          {{ is_metric.value ? '10 cm' : '4 inches' }}</small
         >
       </div>
     </fieldset>
@@ -96,8 +96,8 @@
           <input
             type="radio"
             class="custom-control-input"
-            [formControl]="isStandard"
-            name="isStandard"
+            [formControl]="is_standard"
+            name="is_standard"
             [value]="true"
           />
           <span class="custom-control-indicator"></span>
@@ -108,8 +108,8 @@
           <input
             type="radio"
             class="custom-control-input"
-            [formControl]="isStandard"
-            name="isStandard"
+            [formControl]="is_standard"
+            name="is_standard"
             [value]="false"
           />
           <span class="custom-control-indicator"></span>

@@ -30,7 +30,7 @@ export class DetailsTableComponent {
   }
 
   getMeasurements(bodyPart: string): string {
-    if (this.project.isMetric) {
+    if (this.project.is_metric) {
       return this.measurements[bodyPart].join(', ') + ' cm';
     } else {
       const inches = this.measurements[bodyPart].map(measurement => this.helpers.toInches(measurement));

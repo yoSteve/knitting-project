@@ -4,9 +4,9 @@ export const PROJECTS: Project[] = [
   {
     id: 'prj000',
     name: 'Standard Sweater',
-    isMetric: true,
+    is_metric: true,
     guage: {
-      customGuage: false,
+      custom_guage: false,
       needles: [4, 7, 7],
       width: 10,
       height: 10,
@@ -14,7 +14,7 @@ export const PROJECTS: Project[] = [
       rows: 24
     },
     measurements: {
-      isStandard: true,
+      is_standard: true,
       chest: [89, 98, 107, 115],
       torso: [41, 43, 45, 47],
       sleeve: [50, 51, 52, 53]
@@ -24,9 +24,9 @@ export const PROJECTS: Project[] = [
   {
     id: 'prj001',
     name: 'Custom Sweater',
-    isMetric: false,
+    is_metric: false,
     guage: {
-      customGuage: false,
+      custom_guage: false,
       needles: [5, 8, 6],
       width: 10,
       height: 10,
@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
       rows: 16
     },
     measurements: {
-      isStandard: true,
+      is_standard: true,
       chest: [116],
       torso: [48],
       sleeve: [54]

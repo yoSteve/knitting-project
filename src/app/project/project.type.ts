@@ -4,7 +4,7 @@ export interface Project {
   // cuff_id;
   // yoke_id;
   name: string;
-  isMetric: boolean;
+  is_metric: boolean;
   guage: Guage;
   measurements: Measurements;
   charts?: {
@@ -15,14 +15,14 @@ export interface Project {
 }
 
 export interface Measurements {
-  isStandard: boolean;
+  is_standard: boolean;
   chest: number[];
   torso: number[];
   sleeve: number[];
 }
 
 export interface Guage {
-  customGuage: boolean;
+  custom_guage: boolean;
   needles: number[];
   width: number;
   height: number;

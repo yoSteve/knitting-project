@@ -5,7 +5,7 @@
   <ul class="list-group">
     <li class="list-group-item justify-content-between align-items-center">
       Units of measurment:
-      <strong>{{ project.isMetric ? 'cm' : 'inches' }}</strong>
+      <strong>{{ project.is_metric ? 'cm' : 'inches' }}</strong>
     </li>
     <li class="list-group-item justify-content-between align-items-center">
       Needles Size:
@@ -16,8 +16,8 @@
     <li class="list-group-item justify-content-between align-items-center">
       Swatch:
       <strong
-        >{{ project.isMetric ? '10 cm' : '4 inches' }} x
-        {{ project.isMetric ? '10 cm' : '4 inches' }}</strong
+        >{{ project.is_metric ? '10 cm' : '4 inches' }} x
+        {{ project.is_metric ? '10 cm' : '4 inches' }}</strong
       >
     </li>
     <li class="list-group-item justify-content-between align-items-center">
@@ -28,7 +28,7 @@
     </li>
     <li class="list-group-item justify-content-between align-items-center">
       Custom or Standard Measurements:
-      <strong>{{ measurements.isStandard ? 'Standard' : 'Custom ' }}</strong>
+      <strong>{{ measurements.is_standard ? 'Standard' : 'Custom ' }}</strong>
     </li>
     <li class="list-group-item justify-content-between align-items-center">
       Chest Measurements: <strong>{{ getMeasurements('chest') }}</strong>

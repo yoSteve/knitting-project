@@ -21,18 +21,18 @@ export class DetailsFormComponent implements OnInit {
   ngOnInit() {
     this.needles = this.projectService.getNeedles();
     this.form = this.projectService.buildProjectForm(this.project);
-    this.isStandard.valueChanges
+    this.is_standard.valueChanges
       .subscribe(value => this.onStandardChanges(value));
     this.form.valueChanges
       .subscribe(value => this.valueChanges.emit(this.form.getRawValue()));
   }
 
-  get isMetric(): FormControl {
-    return this.form.get('isMetric') as FormControl;
+  get is_metric(): FormControl {
+    return this.form.get('is_metric') as FormControl;
   }
 
-  get isStandard(): FormControl {
-    return this.form.get('measurements').get('isStandard') as FormControl;
+  get is_standard(): FormControl {
+    return this.form.get('measurements').get('is_standard') as FormControl;
   }
 
   get projectName(): FormControl {

@@ -20,10 +20,16 @@ export class ProjectService {
     return of(foundProject);
   }
 
-  getDefaults(type): Observable<Defaults> {
+  getDefaultProject(type): Observable<Project> {
     // switch (type) {
     //   case 'lopi':
-    return of(LOPI_DEFAULTS);
+    return of({
+      id: null,
+      name: 'My Sweater',
+      is_metric: true,
+      guage: LOPI_DEFAULTS.guage,
+      measurements: LOPI_DEFAULTS.measurements
+    });
     // }
   }
 
@@ -35,9 +41,9 @@ export class ProjectService {
     return this.fb.group({
       id: [project.id],
       name: [project.name, Validators.required],
-      isMetric: [project.isMetric],
+      is_metric: [project.is_metric],
       guage: this.fb.group({
-        customGuage: [project.guage.customGuage],
+        custom_guage: [project.guage.custom_guage],
         needles: [project.guage.needles, Validators.required], // array
         width: [project.guage.width, Validators.required],
         height: [project.guage.height, Validators.required],
@@ -45,25 +51,25 @@ export class ProjectService {
         rows: [project.guage.rows, Validators.pattern(/\d+/)]
       }),
       measurements: this.fb.group({
-        isStandard: [project.measurements.isStandard],
+        is_standard: [project.measurements.is_standard],
         chest: [
           {
             value: project.measurements.chest,
-            disabled: project.measurements.isStandard
+            disabled: project.measurements.is_standard
           },
           Validators.required
         ], // array
         torso: [
           {
             value: project.measurements.torso,
-            disabled: project.measurements.isStandard
+            disabled: project.measurements.is_standard
           },
           Validators.required
         ], // array
         sleeve: [
           {
             value: project.measurements.sleeve,
-            disabled: project.measurements.isStandard
+            disabled: project.measurements.is_standard
           },
           Validators.required
         ] // array

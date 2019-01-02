@@ -18,26 +18,16 @@ export class NewProjectComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectService.getDefaults('lopi')
+    this.projectService.getDefaultProject('lopi')
       .pipe(take(1))
-      .subscribe(defaults => {
-        this.project = this.buildDefaultProject(defaults);
+      .subscribe(defaultProject => {
+        this.project = defaultProject;
         this.loaded = true;
       });
   }
 
   onValueChanges(project: Project): void {
     this.project = project;
-  }
-
-  private buildDefaultProject(defaults: Defaults): Project {
-    return {
-      id: null,
-      name: 'My Sweater',
-      isMetric: true,
-      guage: defaults.guage,
-      measurements: defaults.measurements
-    };
   }
 
 } // end class

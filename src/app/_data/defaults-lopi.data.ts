@@ -21,7 +21,7 @@ const standardChest = [89, 98, 107, 115],
 
 export const LOPI_DEFAULTS: Defaults = {
   guage: {
-    customGuage: false,
+    custom_guage: false,
     needles: [4.5, 7, 7], // [mm, US, UK]
     width: 10,
     height: 10,
@@ -29,7 +29,7 @@ export const LOPI_DEFAULTS: Defaults = {
     rows: 24
   },
   measurements: {
-    isStandard: true,
+    is_standard: true,
     chest: [...chestChild, ...standardChest],
     torso: [...torsoChild, ...torsoWomen, ...torsoMen],
     sleeve: [...sleeveChild, ...sleeveWomen, ...SleeveMen]
