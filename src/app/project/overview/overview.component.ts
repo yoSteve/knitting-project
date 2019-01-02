@@ -10,7 +10,6 @@ import { map, tap, delay } from 'rxjs/operators';
 })
 export class OverviewComponent implements OnInit {
   project$ = this.projectService.project$;
-  loaded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,11 +20,10 @@ export class OverviewComponent implements OnInit {
     this.route.params
       .pipe(
         delay(1000),
-        map(params => params.id),
-        tap(id => this.projectService.fetchProject(id))
+        map(params => params.id)
       )
-      .subscribe(() => {
-        this.loaded = true;
+      .subscribe(id => {
+        this.projectService.fetchProject(id);
       });
   }
 }
