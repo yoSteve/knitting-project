@@ -1,13 +1,16 @@
 {
-  "projects": 
-  [
+  "projects": [
     {
       "id": "prj000",
-      "name": "Dummy Sweater One",
+      "name": "Dummy Sweater One, Bro",
       "is_metric": true,
       "guage": {
         "custom_guage": false,
-        "needles": [4.5, 7, 7],
+        "needles": [
+          4.5,
+          7,
+          7
+        ],
         "width": 10,
         "height": 10,
         "stitches": 18,
@@ -15,9 +18,24 @@
       },
       "measurements": {
         "is_standard": true,
-        "chest": [89, 98, 107, 115],
-        "torso": [41, 43, 45, 47],
-        "sleeve": [50, 51, 52, 53]
+        "chest": [
+          89,
+          98,
+          107,
+          115
+        ],
+        "torso": [
+          41,
+          43,
+          45,
+          47
+        ],
+        "sleeve": [
+          50,
+          51,
+          52,
+          53
+        ]
       }
     },
     {
@@ -26,7 +44,11 @@
       "is_metric": false,
       "guage": {
         "custom_guage": false,
-        "needles": [5, 8, 6],
+        "needles": [
+          5,
+          8,
+          6
+        ],
         "width": 10,
         "height": 10,
         "stitches": 12,
@@ -34,9 +56,67 @@
       },
       "measurements": {
         "is_standard": true,
-        "chest": [116],
-        "torso": [48],
-        "sleeve": [54]
+        "chest": [
+          116
+        ],
+        "torso": [
+          48
+        ],
+        "sleeve": [
+          54
+        ]
+      }
+    },
+    {
+      "id": "QTgSMjF",
+      "name": "My Sweater is Cool",
+      "is_metric": true,
+      "guage": {
+        "custom_guage": false,
+        "needles": [
+          4.5,
+          7,
+          7
+        ],
+        "width": 10,
+        "height": 10,
+        "stitches": 18,
+        "rows": 24
+      },
+      "measurements": {
+        "is_standard": true,
+        "chest": [
+          80,
+          89,
+          89,
+          98,
+          107,
+          115
+        ],
+        "torso": [
+          34,
+          38,
+          38,
+          40,
+          42,
+          44,
+          41,
+          43,
+          45,
+          47
+        ],
+        "sleeve": [
+          38,
+          42,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53
+        ]
       }
     }
   ]

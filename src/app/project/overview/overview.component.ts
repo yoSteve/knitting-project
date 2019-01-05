@@ -25,7 +25,7 @@ export class OverviewComponent implements OnInit {
         map(params => params.id)
       )
       .subscribe(id => {
-        this.projectService.fetchProject(id);
+        this.projectService.getProject(id);
       });
   }
 

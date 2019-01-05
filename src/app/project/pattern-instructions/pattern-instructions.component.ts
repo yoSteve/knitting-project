@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 })
 export class PatternInstructionsComponent implements OnInit {
   project_id;
-  project: Project;
+  project$ = this.projectService.project$;
   mainNeedle = []; // defined
   cuffNeedle = '**TBD**';
   bodyCastOn = '**TBD**';
@@ -42,17 +42,6 @@ export class PatternInstructionsComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-  }
-
-  getProject(id) {
-    this.projectService.getProject(id)
-      .pipe(
-        tap(proj => this.project = proj)
-      )
-      .subscribe(() => {
-        this.mainNeedle = this.project.guage.needles;
-        // this.chestMeasurments = this.project.measurements.chest;
-      });
   }
 
 }

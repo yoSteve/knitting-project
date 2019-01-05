@@ -10,7 +10,7 @@ import { HelpersService } from '@app/shared/services/helpers.service';
 export class DetailsTableComponent {
   @Input() project: Project;
 
-  constructor(private helpers: HelpersService) { }
+  constructor(private helpers: HelpersService) {}
 
   get guage(): Guage {
     return this.project.guage;
@@ -20,7 +20,7 @@ export class DetailsTableComponent {
     return this.project.measurements;
   }
 
-  get needles(): number[]|string[] {
+  get needles(): number[] | string[] {
     if (typeof this.guage.needles === 'string') {
       const string = this.guage.needles as string;
       return string.split(',');
@@ -33,7 +33,9 @@ export class DetailsTableComponent {
     if (this.project.is_metric) {
       return this.measurements[bodyPart].join(', ') + ' cm';
     } else {
-      const inches = this.measurements[bodyPart].map(measurement => this.helpers.toInches(measurement));
+      const inches = this.measurements[bodyPart].map(measurement =>
+        this.helpers.toInches(measurement)
+      );
       return inches.join(', ') + ' inches';
     }
   }

@@ -5,13 +5,14 @@ import { of } from 'rxjs';
 
 
 const fb = new FormBuilder();
+const http = null;
 const dummyProject = PROJECTS[0];
 
 describe('ProjectService', () => {
   let service: ProjectService;
 
   beforeEach(() => {
-    service = new ProjectService(fb);
+    service = new ProjectService(fb, http);
   });
 
   afterEach(() => {

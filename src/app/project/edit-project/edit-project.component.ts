@@ -22,7 +22,7 @@ export class EditProjectComponent implements OnInit {
       )
       .subscribe(id => {
         if (!this.projectService.project || id !== this.projectService.project.id) {
-          this.projectService.fetchProject(id);
+          this.projectService.getProject(id);
         }
       });
   }
@@ -31,11 +31,15 @@ export class EditProjectComponent implements OnInit {
     this.project$.next(project);
   }
 
-  onSave() {
-    console.log('save clicked!');
+  onSave(project: Project): void {
+    console.log('save clicked!', project);
+    this.projectService.updateProject(project)
+      .subscribe(updatedProject => {
+        console.log('updated: ', updatedProject);
+      });
   }
 
-  onCancel() {
+  onCancel(): void {
     console.log('cancel clicked!');
     this.router.navigate(['../'], {relativeTo: this.route});
   }

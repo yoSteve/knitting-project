@@ -14,6 +14,8 @@ export class DetailsFormComponent implements OnInit {
   needles: Observable<any[]>;
   @Input() project: Project;
   @Output() valueChanges = new EventEmitter();
+  @Output() save = new EventEmitter();
+  @Output() cancel = new EventEmitter();
 
   constructor(
     private projectService: ProjectService) {}
@@ -24,7 +26,7 @@ export class DetailsFormComponent implements OnInit {
     this.is_standard.valueChanges
       .subscribe(value => this.onStandardChanges(value));
     this.form.valueChanges
-      .subscribe(value => this.valueChanges.emit(this.form.getRawValue()));
+      .subscribe(() => this.valueChanges.emit(this.form.getRawValue()));
   }
 
   get is_metric(): FormControl {
@@ -53,10 +55,6 @@ export class DetailsFormComponent implements OnInit {
 
   get guageNeedles(): number[] {
     return this.needlesControl.value.split(',');
-  }
-
-  onSubmit() {
-    console.log('submitted!');
   }
 
   private onStandardChanges(value: boolean) {

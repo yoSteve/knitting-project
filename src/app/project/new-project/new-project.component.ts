@@ -29,4 +29,16 @@ export class NewProjectComponent implements OnInit {
     this.project = project;
   }
 
+  onSave(project: Project) {
+    console.log('save clicked!', project);
+    this.projectService.addProject(project)
+      .subscribe(newProject => {
+        console.log('saved!', newProject);
+      });
+  }
+
+  onCancel() {
+    console.log('cancel clicked!');
+  }
+
 } // end class

@@ -7,6 +7,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment as ENV } from '@environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,44 @@ export class ProjectService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  fetchProject(id): void {
-    this.http.get<Project>(`${this.url}/${id}`)
+  getProject(id): void {
+    this.http.get<Project>(`${this.url}/${id}`).pipe(
+        catchError(err => {
+          console.error('getProject failed.', err.message);
+          return of(err);
+        })
+      )
       .subscribe(data => {
         this.project = data;
         this.project$.next(data);
       });
+  }
+
+  addProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(this.url, project).pipe(
+      catchError(err => {
+        console.error('addProject failed.', err.message);
+        return of(err);
+      })
+    );
+  }
+
+  updateProject(project: Project): Observable<Project> {
+    return this.http.put<Project>(`${this.url}/${project.id}`, project).pipe(
+      catchError(err => {
+        console.error('addProject failed.', err.message);
+        return of(err);
+      })
+    );
+  }
+
+  deleteProject(id): Observable<any> {
+    return this.http.delete<Project>(`${this.url}/${id}`).pipe(
+      catchError(err => {
+        console.error('addProject failed.', err.message);
+        return of(err);
+      })
+    );
   }
 
   getDefaultProject(type): Observable<Project> {

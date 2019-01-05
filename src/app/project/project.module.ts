@@ -10,6 +10,7 @@ import { DetailsTableComponent } from './presentational/details-table/details-ta
 import { NewProjectComponent } from './new-project/new-project.component';
 import { OverviewComponent } from './overview/overview.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ListProjectsComponent } from './list-projects/list-projects.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
     DetailsTableComponent,
     NewProjectComponent,
     OverviewComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    ListProjectsComponent
   ],
   imports: [
     CommonModule,

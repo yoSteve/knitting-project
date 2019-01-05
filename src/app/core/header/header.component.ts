@@ -9,10 +9,8 @@ export class HeaderComponent implements OnInit {
   @Input() title: string;
   routes = [
     { route: '/', name: 'Home' },
-    { route: 'project/new', name: 'Project Setup' },
-    { route: 'project/123/print', name: 'Pattern Instructions' },
-    { route: 'project/prj000/', name: 'Pattern One' },
-    { route: 'project/prj001/', name: 'Pattern Two' }
+    { route: 'project/new', name: 'New Project' },
+    { route: 'projects', name: 'Projects List' }
   ];
 
   constructor() { }

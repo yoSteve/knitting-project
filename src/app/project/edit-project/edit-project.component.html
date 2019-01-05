@@ -3,17 +3,16 @@
 <ng-container *ngIf="project$ | async; else loading">
 
   <div class="flex-container">
+
     <article>
-      <knit-details-form [project]="project$ | async" (valueChanges)="onValueChanges($event)">
+      <knit-details-form
+      [project]="project$ | async"
+      (valueChanges)="onValueChanges($event)"
+      (save)="onSave($event)"
+      (cancel)="onCancel()">
         <h2>{{ title }}</h2>
         <p>Fill in the form to set up the basics of sweater construction</p>
       </knit-details-form>
-  
-      <div class="actions-container">
-        <button class="btn btn-success" type="button" (click)="onSave()">Save</button>
-        <button class="btn btn-secondary" type="button" (click)="onCancel()">Cancel</button>
-      </div>
-
     </article>
 
     <article class="results-container">
@@ -22,7 +21,6 @@
       </knit-details-table>
 
     </article>
-
 
   </div>
 
