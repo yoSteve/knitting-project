@@ -1,0 +1,5 @@
+@import 'mixins';
+
+li {
+  @include flex(row, space-between);
+}

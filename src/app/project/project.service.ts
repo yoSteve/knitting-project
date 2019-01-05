@@ -34,6 +34,15 @@ export class ProjectService {
       });
   }
 
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.url).pipe(
+      catchError(err => {
+        console.error('getProjects failed.', err.message);
+        return of(err);
+      })
+    );
+  }
+
   addProject(project: Project): Observable<Project> {
     return this.http.post<Project>(this.url, project).pipe(
       catchError(err => {

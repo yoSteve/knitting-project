@@ -4,11 +4,3 @@
 .flex-container {
   @include flex(row, space-between, flex-start);
 }
-
-.actions-container {
-  @include flex(row, flex-end);
-
-  &> * {
-    margin-left: 0.5rem;
-  }
-}

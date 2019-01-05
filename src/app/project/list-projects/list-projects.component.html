@@ -1,3 +1,16 @@
-<p>
-  list-projects works!
-</p>
+<h1>{{ title }}</h1>
+
+<ul class="list-group">
+
+  <li *ngFor="let project of projects$ | async"
+    class="list-group-item">
+    <a [routerLink]="['..', 'project', project.id]">
+      {{ project.name }}
+    </a>
+    <div class="button-wrapper">
+      <button type="button" class="btn btn-primary" (click)="onEdit(project.id)">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="onDelete(project.id)">Delete</button>
+    </div>
+  </li>
+
+</ul>

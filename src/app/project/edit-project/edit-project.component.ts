@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./edit-project.component.scss']
 })
 export class EditProjectComponent implements OnInit {
-  title: 'Edit Project';
+  title = 'Edit Project';
   project$ = this.projectService.project$;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) { }

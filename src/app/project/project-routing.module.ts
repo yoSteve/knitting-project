@@ -5,6 +5,7 @@ import { PatternInstructionsComponent } from './pattern-instructions/pattern-ins
 import { NewProjectComponent } from './new-project/new-project.component';
 import { OverviewComponent } from './overview/overview.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ListProjectsComponent } from './list-projects/list-projects.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
       { path: ':id/print', component: PatternInstructionsComponent }, /* Print ready pattern view  */
       { path: ':id', component: OverviewComponent } /* Project Overview */
     ]
+  },
+  {
+    path: 'projects', component: ListProjectsComponent
   }
 ];
 
