@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
 import { Router } from '@angular/router';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ProjectState } from '../state/project.state';
+import { Project } from '../project.type';
 
 @Component({
   selector: 'knit-list-projects',
@@ -9,9 +13,9 @@ import { Router } from '@angular/router';
 })
 export class ListProjectsComponent implements OnInit {
   title = `List o' Projects`;
-  projects$ = this.projectService.getProjects();
+  @Select(ProjectState.projects) projects$: Observable<Project[]>;
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(private projectService: ProjectService, private router: Router, private store: Store) { }
 
   ngOnInit() {
   }
