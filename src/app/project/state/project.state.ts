@@ -1,6 +1,6 @@
 import { Project } from '../project.type';
 import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
-import { AddProject, GetProjects } from './project.action';
+import { AddProject, GetProjects, RemoveProject } from './project.action';
 import { ProjectService } from '../project.service';
 import { tap } from 'rxjs/operators';
 
@@ -17,7 +17,6 @@ export class ProjectStateModel {
   }
 })
 export class ProjectState implements NgxsOnInit {
-
   constructor(private projectService: ProjectService) {}
 
   @Selector()
@@ -34,9 +33,22 @@ export class ProjectState implements NgxsOnInit {
     context.dispatch(new GetProjects());
   }
 
+  @Action(GetProjects)
+  getAll({ patchState }: StateContext<ProjectStateModel>) {
+    return this.projectService
+      .getProjects()
+      .pipe(tap(projects => patchState({ projects })));
+    {
+    }
+  }
+
   @Action(AddProject)
-  add({getState, patchState}: StateContext<ProjectStateModel>, {payload}: AddProject) {
-    return this.projectService.addProject(payload)
+  add(
+    { getState, patchState }: StateContext<ProjectStateModel>,
+    { payload }: AddProject
+  ) {
+    return this.projectService
+      .addProject(payload)
       .pipe(
         tap(newProject => {
           const state = getState();
@@ -47,12 +59,20 @@ export class ProjectState implements NgxsOnInit {
       );
   }
 
-  @Action(GetProjects)
-  getAll({ getState, patchState }: StateContext<ProjectStateModel>) {
-    return this.projectService.getProjects()
+  @Action(RemoveProject)
+  delete(
+    { getState, patchState }: StateContext<ProjectStateModel>,
+    { payload }: RemoveProject
+  ) {
+    return this.projectService
+      .deleteProject(payload)
       .pipe(
-        tap(projects => patchState({ projects })),
+        tap(() => {
+          const filtered = getState().projects.filter(project => project.id !== payload);
+          patchState({
+            projects: [...filtered]
+          });
+        })
       );
   }
-
 } // end class

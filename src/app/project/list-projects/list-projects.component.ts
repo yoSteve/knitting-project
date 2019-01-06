@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
 import { Router } from '@angular/router';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ProjectState } from '../state/project.state';
 import { Project } from '../project.type';
+import { RemoveProject } from '../state/project.action';
 
 @Component({
   selector: 'knit-list-projects',
@@ -15,20 +15,18 @@ export class ListProjectsComponent implements OnInit {
   title = `List o' Projects`;
   @Select(ProjectState.projects) projects$: Observable<Project[]>;
 
-  constructor(private projectService: ProjectService, private router: Router, private store: Store) { }
+  constructor(
+    private router: Router,
+    private store: Store
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  onEdit(id) {
+  onEdit(id: string) {
     this.router.navigate(['..', 'project', id, 'edit']);
   }
 
-  onDelete(id) {
-    this.projectService.deleteProject(id)
-      .subscribe(res => {
-        console.log('deleted! ', res);
-      });
+  onDelete(id: string) {
+    this.store.dispatch(new RemoveProject(id));
   }
-
 }
