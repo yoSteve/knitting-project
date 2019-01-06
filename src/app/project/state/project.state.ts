@@ -1,6 +1,6 @@
 import { Project } from '../project.type';
 import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
-import { AddProject, GetProjects, RemoveProject } from './project.action';
+import { AddProject, GetProjects, RemoveProject, UpdateProject } from './project.action';
 import { ProjectService } from '../project.service';
 import { tap } from 'rxjs/operators';
 
@@ -54,6 +54,25 @@ export class ProjectState implements NgxsOnInit {
           const state = getState();
           patchState({
             projects: [...state.projects, newProject]
+          });
+        })
+      );
+  }
+
+  @Action(UpdateProject)
+  update(
+    { getState, patchState }: StateContext<ProjectStateModel>,
+    { payload }: UpdateProject
+  ) {
+    return this.projectService
+      .updateProject(payload)
+      .pipe(
+        tap(newProject => {
+          const updated = getState().projects.map(project => {
+            return project.id === payload.id ? payload : project;
+          });
+          patchState({
+            projects: [...updated]
           });
         })
       );

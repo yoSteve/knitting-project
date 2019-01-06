@@ -9,6 +9,11 @@ export class AddProject {
   constructor(public payload: Project) {}
 }
 
+export class UpdateProject {
+  static readonly type = '[Project] Update Project';
+  constructor(public payload: Project) {}
+}
+
 export class RemoveProject {
   static readonly type = '[Project] Remove Project';
   constructor(public payload: string) {}

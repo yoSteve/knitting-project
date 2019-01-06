@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": "prj000",
-      "name": "Dummy Sweater One, Bro",
+      "name": "Dummy Sweater One, Dude",
       "is_metric": true,
       "guage": {
         "custom_guage": false,
