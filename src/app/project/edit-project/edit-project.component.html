@@ -5,7 +5,6 @@
     <article>
       <knit-details-form
       [project]="project$ | async"
-      (valueChanges)="onValueChanges($event)"
       (save)="onSave($event)"
       (cancel)="onCancel()">
         <h2>{{ title }}</h2>

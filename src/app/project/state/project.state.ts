@@ -1,6 +1,6 @@
 import { Project } from '../project.type';
 import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
-import { AddProject, GetProjects, RemoveProject, UpdateProject } from './project.action';
+import { AddProject, GetProjects, RemoveProject, UpdateProject, SetCurrentProject } from './project.action';
 import { ProjectService } from '../project.service';
 import { tap } from 'rxjs/operators';
 
@@ -38,8 +38,17 @@ export class ProjectState implements NgxsOnInit {
     return this.projectService
       .getProjects()
       .pipe(tap(projects => patchState({ projects })));
-    {
-    }
+  }
+
+  @Action(SetCurrentProject)
+  setCurrent(
+    { patchState }: StateContext<ProjectStateModel>,
+    { payload }: SetCurrentProject) {
+      return this.projectService
+        .getProject(payload)
+        .pipe(
+          tap(foundProject => patchState({ currentProject: foundProject }))
+        );
   }
 
   @Action(AddProject)
@@ -53,6 +62,7 @@ export class ProjectState implements NgxsOnInit {
         tap(newProject => {
           const state = getState();
           patchState({
+            currentProject: newProject,
             projects: [...state.projects, newProject]
           });
         })
@@ -67,11 +77,12 @@ export class ProjectState implements NgxsOnInit {
     return this.projectService
       .updateProject(payload)
       .pipe(
-        tap(newProject => {
+        tap(updatedProject => {
           const updated = getState().projects.map(project => {
             return project.id === payload.id ? payload : project;
           });
           patchState({
+            currentProject: updatedProject,
             projects: [...updated]
           });
         })
@@ -88,10 +99,13 @@ export class ProjectState implements NgxsOnInit {
       .pipe(
         tap(() => {
           const filtered = getState().projects.filter(project => project.id !== payload);
+          const current = getState().currentProject;
           patchState({
+            currentProject: current.id === payload ? null : current,
             projects: [...filtered]
           });
         })
       );
   }
+
 } // end class

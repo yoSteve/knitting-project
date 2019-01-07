@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectService } from '../project.service';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, combineLatest } from 'rxjs/operators';
+import { Store, Select } from '@ngxs/store';
+import { ProjectState } from '../state/project.state';
+import { Observable } from 'rxjs';
+import { Project } from '../project.type';
+import { SetCurrentProject } from '../state/project.action';
 
 @Component({
   selector: 'knit-overview',
@@ -10,26 +14,29 @@ import { map, delay } from 'rxjs/operators';
 })
 export class OverviewComponent implements OnInit {
   title = 'Project Details';
-  project$ = this.projectService.project$;
+  @Select(ProjectState.currentProject) project$: Observable<Project>;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private projectService: ProjectService
+    private store: Store
   ) {}
 
   ngOnInit() {
     this.route.params
       .pipe(
-        delay(1000),
-        map(params => params.id)
+        map(params => params.id),
+        combineLatest(this.project$),
+        delay(600)
       )
-      .subscribe(id => {
-        this.projectService.getProject(id);
+      .subscribe(combined => {
+        if (!combined[1] || combined[0] !== combined[1].id) {
+          this.store.dispatch(new SetCurrentProject(combined[0]));
+        }
       });
   }
 
   onNavigate(route: string): void {
-    this.router.navigate([route], {relativeTo: this.route});
+    this.router.navigate([route], { relativeTo: this.route });
   }
 } // end class

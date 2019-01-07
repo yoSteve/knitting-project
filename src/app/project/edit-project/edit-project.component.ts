@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
 import { Project } from '../project.type';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngxs/store';
-import { UpdateProject } from '../state/project.action';
+import { map, combineLatest, delay } from 'rxjs/operators';
+import { Store, Select } from '@ngxs/store';
+import { UpdateProject, SetCurrentProject } from '../state/project.action';
+import { Observable } from 'rxjs';
+import { ProjectState } from '../state/project.state';
 
 @Component({
   selector: 'knit-edit-project',
@@ -13,36 +14,38 @@ import { UpdateProject } from '../state/project.action';
 })
 export class EditProjectComponent implements OnInit {
   title = 'Edit Project';
-  project$ = this.projectService.project$;
+  @Select(ProjectState.currentProject) project$: Observable<Project>;
 
   constructor(
-    private projectService: ProjectService,
     private route: ActivatedRoute,
     private router: Router,
     private store: Store
   ) {}
 
   ngOnInit() {
-    this.route.params.pipe(map(params => params.id)).subscribe(id => {
-      if (
-        !this.projectService.project ||
-        id !== this.projectService.project.id
-      ) {
-        this.projectService.getProject(id);
-      }
+    this.route.params
+      .pipe(
+        map(params => params.id),
+        combineLatest(this.project$),
+        delay(600)
+      )
+      .subscribe(combined => {
+        if (!combined[1] || combined[0] !== combined[1].id) {
+          this.store.dispatch(new SetCurrentProject(combined[0]));
+        }
     });
   }
 
-  onValueChanges(project: Project): void {
-    this.project$.next(project);
-  }
-
   onSave(project: Project): void {
-    this.store.dispatch(new UpdateProject(project));
+    this.store.dispatch([
+      new UpdateProject(project),
+      new SetCurrentProject(project.id)
+    ]);
   }
 
   onCancel(): void {
     console.log('cancel clicked!');
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-}
+
+} // end class

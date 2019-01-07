@@ -21,17 +21,13 @@ export class ProjectService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  getProject(id): void {
-    this.http.get<Project>(`${this.url}/${id}`).pipe(
-        catchError(err => {
-          console.error('getProject failed.', err.message);
-          return of(err);
-        })
-      )
-      .subscribe(data => {
-        this.project = data;
-        this.project$.next(data);
-      });
+  getProject(id: string): Observable<Project> {
+    return this.http.get<Project>(`${this.url}/${id}`).pipe(
+      catchError(err => {
+        console.error('getProject failed.', err.message);
+        return of(err);
+      })
+    );
   }
 
   getProjects(): Observable<Project[]> {

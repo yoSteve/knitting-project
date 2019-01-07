@@ -4,6 +4,11 @@ export class GetProjects {
   static readonly type = '[Project] Get Projects';
 }
 
+export class SetCurrentProject {
+  static readonly type = '[Project] Set Current';
+  constructor(public payload: string) { }
+}
+
 export class AddProject {
   static readonly type = '[Project] Add Project';
   constructor(public payload: Project) {}

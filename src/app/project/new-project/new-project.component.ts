@@ -4,6 +4,7 @@ import { Project } from '../project.type';
 import { take, delay } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import { AddProject } from '../state/project.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'knit-new-project',
@@ -14,7 +15,11 @@ export class NewProjectComponent implements OnInit {
   title: 'New Project';
   project: Project;
 
-  constructor(private projectService: ProjectService, private store: Store) { }
+  constructor(
+    private projectService: ProjectService,
+    private store: Store,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.projectService.getDefaultProject('lopi')
@@ -27,16 +32,12 @@ export class NewProjectComponent implements OnInit {
       });
   }
 
-  onValueChanges(project: Project): void {
-    this.project = project;
-  }
-
   onSave(project: Project) {
     this.store.dispatch(new AddProject(project));
   }
 
   onCancel() {
-    console.log('cancel clicked!');
+    this.router.navigate(['..', 'projects']);
   }
 
 } // end class
