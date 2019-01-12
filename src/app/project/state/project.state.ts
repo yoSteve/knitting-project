@@ -35,20 +35,19 @@ export class ProjectState implements NgxsOnInit {
 
   @Action(GetProjects)
   getAll({ patchState }: StateContext<ProjectStateModel>) {
-    return this.projectService
-      .getProjects()
+    return this.projectService.getProjects()
       .pipe(tap(projects => patchState({ projects })));
   }
 
   @Action(SetCurrentProject)
   setCurrent(
     { patchState }: StateContext<ProjectStateModel>,
-    { payload }: SetCurrentProject) {
-      return this.projectService
-        .getProject(payload)
-        .pipe(
-          tap(foundProject => patchState({ currentProject: foundProject }))
-        );
+    { payload }: SetCurrentProject
+  ) {
+    return this.projectService.getProject(payload)
+      .pipe(
+        tap(foundProject => patchState({ currentProject: foundProject }))
+      );
   }
 
   @Action(AddProject)
@@ -56,8 +55,7 @@ export class ProjectState implements NgxsOnInit {
     { getState, patchState }: StateContext<ProjectStateModel>,
     { payload }: AddProject
   ) {
-    return this.projectService
-      .addProject(payload)
+    return this.projectService.addProject(payload)
       .pipe(
         tap(newProject => {
           const state = getState();
@@ -74,8 +72,7 @@ export class ProjectState implements NgxsOnInit {
     { getState, patchState }: StateContext<ProjectStateModel>,
     { payload }: UpdateProject
   ) {
-    return this.projectService
-      .updateProject(payload)
+    return this.projectService.updateProject(payload)
       .pipe(
         tap(updatedProject => {
           const updated = getState().projects.map(project => {
@@ -94,8 +91,7 @@ export class ProjectState implements NgxsOnInit {
     { getState, patchState }: StateContext<ProjectStateModel>,
     { payload }: RemoveProject
   ) {
-    return this.projectService
-      .deleteProject(payload)
+    return this.projectService.deleteProject(payload)
       .pipe(
         tap(() => {
           const filtered = getState().projects.filter(project => project.id !== payload);
