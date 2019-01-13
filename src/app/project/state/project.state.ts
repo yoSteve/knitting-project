@@ -36,7 +36,9 @@ export class ProjectState implements NgxsOnInit {
   @Action(GetProjects)
   getAll({ patchState }: StateContext<ProjectStateModel>) {
     return this.projectService.getProjects()
-      .pipe(tap(projects => patchState({ projects })));
+      .pipe(
+        tap(projects => patchState({ projects }))
+      );
   }
 
   @Action(SetCurrentProject)

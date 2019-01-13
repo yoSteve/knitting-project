@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { PROJECTS } from '@app/_data/project.data';
 import { Project } from './state/project.type';
 import { NEEDLE_SIZES } from '@app/_data/needle-sizes.data';
-import { Defaults, LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
+import { Observable, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment as ENV } from '@environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +14,6 @@ import { catchError, tap } from 'rxjs/operators';
 export class ProjectService {
   private url = `${ENV.databaseUrl}/projects`;
   private _needles: any[] = NEEDLE_SIZES;
-
-  project$ = new BehaviorSubject(null);
-  project: Project;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
