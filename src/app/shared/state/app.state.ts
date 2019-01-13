@@ -1,10 +1,5 @@
 import { State, Selector } from '@ngxs/store';
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { User } from '@app/user/state/user.type';
 
 export class GlobalStateModel {
   readonly appName: string;
@@ -24,7 +19,12 @@ export class GlobalStateModel {
 })
 export class GlobalState {
   @Selector()
-  static getAppName(state: GlobalStateModel) {
+  static appName(state: GlobalStateModel) {
     return state.appName;
+  }
+
+  @Selector()
+  static currentUser(state: GlobalStateModel) {
+    return state.currentUser;
   }
 }

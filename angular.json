@@ -145,5 +145,8 @@
       }
     }
   },
-  "defaultProject": "knitting-project"
+  "defaultProject": "knitting-project",
+  "cli": {
+    "defaultCollection": "@ngxs/schematics"
+  }
 }

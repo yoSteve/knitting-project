@@ -1,4 +1,16 @@
 {
+  "users": [
+    {
+      "id": "user1",
+      "name": "Steve",
+      "email": "steve.yorke@gmail.com"
+    },
+    {
+      "id": "user2",
+      "name": "Will Riker",
+      "email": "wriker@uss.enterprise"
+    }
+  ],
   "projects": [
     {
       "id": "prj000",

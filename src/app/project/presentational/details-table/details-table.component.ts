@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Project, Guage, Measurements } from '../../state/project.type';
 import { HelpersService } from '@app/shared/services/helpers.service';
+import { User } from '@app/shared/state/app.state';
 
 @Component({
   selector: 'knit-details-table',
@@ -9,8 +10,16 @@ import { HelpersService } from '@app/shared/services/helpers.service';
 })
 export class DetailsTableComponent {
   @Input() project: Project;
+  @Input() owner: User;
 
-  constructor(private helpers: HelpersService) {}
+  constructor(private helpers: HelpersService) {
+    // TODO: Update this after implementing UserService
+    this.owner = {
+      id: 'user1',
+      name: 'Steve Dev',
+      email: 'steve.yorke@gmail.com'
+    };
+  }
 
   get guage(): Guage {
     return this.project.guage;
