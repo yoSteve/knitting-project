@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { ProjectService } from '../project.service';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'knit-pattern-instructions',

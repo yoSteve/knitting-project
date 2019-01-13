@@ -2,8 +2,8 @@
  * All measurements are in millimetres.
  * Conversion to Imperial is done by ProjectService. */
 
-import { Guage } from '@app/project/project.type';
-import { Measurements } from '@app/project/project.type';
+import { Guage } from '@app/project/state/project.type';
+import { Measurements } from '@app/project/state/project.type';
 
 export interface Defaults {
   guage: Guage;

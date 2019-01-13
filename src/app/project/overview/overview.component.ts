@@ -4,7 +4,7 @@ import { map, delay, combineLatest, take } from 'rxjs/operators';
 import { Store, Select } from '@ngxs/store';
 import { ProjectState } from '../state/project.state';
 import { Observable } from 'rxjs';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { SetCurrentProject } from '../state/project.action';
 
 @Component({

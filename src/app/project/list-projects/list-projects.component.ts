@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ProjectState } from '../state/project.state';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { RemoveProject } from '../state/project.action';
 
 @Component({

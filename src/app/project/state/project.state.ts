@@ -1,4 +1,4 @@
-import { Project } from '../project.type';
+import { Project } from './project.type';
 import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { AddProject, GetProjects, RemoveProject, UpdateProject, SetCurrentProject } from './project.action';
 import { ProjectService } from '../project.service';

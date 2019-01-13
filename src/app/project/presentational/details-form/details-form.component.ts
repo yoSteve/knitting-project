@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../../project.service';
 import { Observable } from 'rxjs';
-import { Project } from '@app/project/project.type';
+import { Project } from '@app/project/state/project.type';
 
 @Component({
   selector: 'knit-details-form',

@@ -1,4 +1,4 @@
-import { Project } from '../project.type';
+import { Project } from './project.type';
 
 export class GetProjects {
   static readonly type = '[Project] Get Projects';

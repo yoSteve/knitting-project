@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, combineLatest, delay, take } from 'rxjs/operators';
 import { Store, Select } from '@ngxs/store';

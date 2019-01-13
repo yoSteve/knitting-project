@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { take, delay } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import { AddProject } from '../state/project.action';

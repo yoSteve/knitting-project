@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PROJECTS } from '@app/_data/project.data';
-import { Project } from './project.type';
+import { Project } from './state/project.type';
 import { NEEDLE_SIZES } from '@app/_data/needle-sizes.data';
 import { Defaults, LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
 import { Observable, of, BehaviorSubject } from 'rxjs';
@@ -75,6 +75,7 @@ export class ProjectService {
       case 'lopi':
         return of({
           id: null,
+          owner_id: null,
           name: 'My Sweater',
           is_metric: true,
           guage: LOPI_DEFAULTS.guage,
