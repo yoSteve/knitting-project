@@ -20,7 +20,7 @@ export class UserState {
   constructor(private userService: UserService) {}
 
   @Selector()
-  public static current(state: UserStateModel) {
+  public static currentUser(state: UserStateModel) {
     return state.currentUser;
   }
 

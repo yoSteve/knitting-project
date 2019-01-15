@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 import { ProjectModule } from './project/project.module';
 import { environment as ENV } from '@environments/environment';
 import { GlobalState } from './shared/state/app.state';
+import { UserState } from './user/state/user.state';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { GlobalState } from './shared/state/app.state';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgxsModule.forRoot([GlobalState], {developmentMode: !ENV.production}),
+    NgxsModule.forRoot([GlobalState, UserState], {developmentMode: !ENV.production}),
     NgxsLoggerPluginModule.forRoot(),
     CoreModule,
     ProjectModule,

@@ -1,0 +1,23 @@
+<div class="btn-group" role="group">
+
+  <button *ngIf="user" type="button" class="btn btn-info">
+    User: <strong>{{ user.name}}</strong>
+  </button>
+
+  <button *ngIf="!user" type="button" class="btn btn-info">
+    <strong>Select User</strong>
+  </button>
+
+  <div class="btn-group" role="group">
+
+    <button id="changeUserMenu" type="button" class="btn btn-info dropdown-toggle" (click)="menuOpen = !menuOpen">
+    </button>
+    
+    <div class="dropdown-menu" aria-labelledby="changeUserMenu" [ngClass]="{'show': menuOpen}">
+      <a class="dropdown-item" (click)="changeUser.emit('user1')">User 1</a>
+      <a class="dropdown-item" (click)="changeUser.emit('user2')">User 2</a>
+    </div>
+
+  </div>
+
+</div>

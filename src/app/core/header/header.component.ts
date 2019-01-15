@@ -1,4 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { UserState } from '@app/user/state/user.state';
+import { Observable } from 'rxjs';
+import { SetCurrentUser } from '@app/user/state/user.actions';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-header',
@@ -7,15 +12,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Input() title: string;
+  @Select(UserState.currentUser) currentUser$: Observable<User>;
+
   routes = [
     { route: '/', name: 'Home' },
     { route: 'project/new', name: 'New Project' },
     { route: 'projects', name: 'Projects List' }
   ];
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
+  }
+
+  signInAs(userId: string) {
+    this.store.dispatch(new SetCurrentUser(userId));
   }
 
 }

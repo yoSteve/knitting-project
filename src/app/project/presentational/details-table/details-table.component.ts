@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Project, Guage, Measurements } from '../../state/project.type';
 import { HelpersService } from '@app/shared/services/helpers.service';
-import { User } from '@app/shared/state/app.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-details-table',
