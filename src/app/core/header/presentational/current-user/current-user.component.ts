@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '@app/user/state/user.type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'knit-current-user',
@@ -11,9 +12,13 @@ export class CurrentUserComponent implements OnInit {
   @Output() changeUser = new EventEmitter();
   menuOpen = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToProfile() {
+    this.router.navigate(['users', this.user.id]);
   }
 
 }

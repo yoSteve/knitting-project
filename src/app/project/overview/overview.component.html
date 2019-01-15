@@ -3,9 +3,9 @@
 <ng-container
 *ngIf="project$ | async; else loading">
 
-<knit-details-table
+<knit-project-details-table
   [project]="project$ | async"
-></knit-details-table>
+></knit-project-details-table>
 
 <div class="actions-container">
   <button class="btn btn-primary" type="button" (click)="onNavigate('print')">View Instructions</button>

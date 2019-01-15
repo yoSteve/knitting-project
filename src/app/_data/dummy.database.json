@@ -14,6 +14,7 @@
   "projects": [
     {
       "id": "prj000",
+      "owner_id": "user1",
       "name": "Dummy Sweater One",
       "is_metric": true,
       "guage": {
@@ -52,7 +53,8 @@
     },
     {
       "id": "prj001",
-      "name": "Dummy Sweater Two",
+      "owner_id": "user2",
+      "name": "Riker's Sweater",
       "is_metric": false,
       "guage": {
         "custom_guage": false,
@@ -81,6 +83,7 @@
     },
     {
       "id": "9DYl3f0",
+      "owner_id": "user1",
       "name": "My Sweater is Cool...?",
       "is_metric": true,
       "guage": {

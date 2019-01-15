@@ -31,6 +31,7 @@ export class ProjectService {
   }
 
   getProjects(): Observable<Project[]> {
+    console.log('going for it: ', this.url);
     return this.http.get<Project[]>(this.url).pipe(
       catchError(err => {
         console.error('getProjects failed.', err.message);

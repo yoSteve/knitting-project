@@ -3,19 +3,19 @@
   <div class="flex-container">
 
     <article>
-      <knit-details-form
+      <knit-project-details-form
       [project]="project$ | async"
       (save)="onSave($event)"
       (cancel)="onCancel()">
         <h2>{{ title }}</h2>
         <p>Fill in the form to set up the basics of sweater construction</p>
-      </knit-details-form>
+      </knit-project-details-form>
     </article>
 
     <article class="results-container">
-      <knit-details-table [project]="project$ | async">
+      <knit-project-details-table [project]="project$ | async">
         <h4>Project Details Overview</h4>
-      </knit-details-table>
+      </knit-project-details-table>
 
     </article>
 

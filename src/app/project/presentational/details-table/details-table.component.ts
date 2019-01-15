@@ -4,7 +4,7 @@ import { HelpersService } from '@app/shared/services/helpers.service';
 import { User } from '@app/user/state/user.type';
 
 @Component({
-  selector: 'knit-details-table',
+  selector: 'knit-project-details-table',
   templateUrl: './details-table.component.html',
   styleUrls: ['./details-table.component.scss']
 })

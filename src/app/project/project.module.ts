@@ -13,6 +13,7 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
 import { NgxsModule } from '@ngxs/store';
 import { ProjectState } from './state/project.state';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProjectState } from './state/project.state';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ProjectRoutingModule,

@@ -1,6 +1,6 @@
 <div class="btn-group" role="group">
 
-  <button *ngIf="user" type="button" class="btn btn-info">
+  <button *ngIf="user" type="button" class="btn btn-info" (click)="goToProfile()">
     User: <strong>{{ user.name}}</strong>
   </button>
 

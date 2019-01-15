@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
 
   routes = [
     { route: '/', name: 'Home' },
-    { route: 'project/new', name: 'New Project' },
-    { route: 'projects', name: 'Projects List' }
+    { route: 'projects/new', name: 'New Project' },
+    { route: 'projects/list', name: 'Projects List' }
   ];
 
   constructor(private store: Store) { }

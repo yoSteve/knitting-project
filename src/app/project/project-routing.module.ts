@@ -9,19 +9,17 @@ import { ListProjectsComponent } from './list-projects/list-projects.component';
 
 const routes: Routes = [
   {
-    path: 'project',
+    path: '',
     component: ProjectComponent,
     children: [
       { path: 'new', component: NewProjectComponent },
-      { path: ':id/edit', component: EditProjectComponent }, /* Edit Project params */
+      { path: 'list', component: ListProjectsComponent },
+      { path: ':id/edit', component: EditProjectComponent },
       // { path: ':id/design', component: ProjectDesignComponent } /* Project Design view */
       { path: ':id/print', component: PatternInstructionsComponent }, /* Print ready pattern view  */
-      { path: ':id', component: OverviewComponent } /* Project Overview */
+      { path: ':id', component: OverviewComponent }
     ]
   },
-  {
-    path: 'projects', component: ListProjectsComponent
-  }
 ];
 
 @NgModule({

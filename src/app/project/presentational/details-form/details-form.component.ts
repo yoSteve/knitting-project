@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Project } from '@app/project/state/project.type';
 
 @Component({
-  selector: 'knit-details-form',
+  selector: 'knit-project-details-form',
   templateUrl: './details-form.component.html',
   styleUrls: ['./details-form.component.scss']
 })
