@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
 import { Project } from '../state/project.type';
 import { take, delay } from 'rxjs/operators';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { AddProject } from '../state/project.action';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserState } from '@app/user/state/user.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-new-project',
@@ -14,6 +17,7 @@ import { Router } from '@angular/router';
 export class NewProjectComponent implements OnInit {
   title: 'New Project';
   project: Project;
+  @Select(UserState.currentUser) currentUser$: Observable<User>;
 
   constructor(
     private projectService: ProjectService,

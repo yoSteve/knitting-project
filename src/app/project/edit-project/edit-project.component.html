@@ -13,7 +13,9 @@
     </article>
 
     <article class="results-container">
-      <knit-project-details-table [project]="project$ | async">
+      <knit-project-details-table 
+        [owner]="owner$ | async"
+        [project]="project$ | async">
         <h4>Project Details Overview</h4>
       </knit-project-details-table>
 

@@ -1,8 +1,9 @@
 import { Project } from './project.type';
-import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { AddProject, GetProjects, RemoveProject, UpdateProject, SetCurrentProject } from './project.action';
 import { ProjectService } from '../project.service';
 import { tap } from 'rxjs/operators';
+import { SetProjectOwner } from '@app/user/state/user.actions';
 
 export class ProjectStateModel {
   readonly projects: Project[];
@@ -17,7 +18,7 @@ export class ProjectStateModel {
   }
 })
 export class ProjectState implements NgxsOnInit {
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private store: Store) {}
 
   @Selector()
   static projects(state: ProjectStateModel) {
@@ -48,7 +49,10 @@ export class ProjectState implements NgxsOnInit {
   ) {
     return this.projectService.getProject(payload)
       .pipe(
-        tap(foundProject => patchState({ currentProject: foundProject }))
+        tap(foundProject => {
+          patchState({ currentProject: foundProject });
+          this.store.dispatch(new SetProjectOwner(foundProject.owner_id));
+        })
       );
   }
 

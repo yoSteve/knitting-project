@@ -11,7 +11,9 @@
     </knit-project-details-form>
   
     <article class="results-container">
-      <knit-project-details-table *ngIf="project" [project]="project">
+      <knit-project-details-table *ngIf="project"
+      [owner]="currentUser$ | async"
+      [project]="project">
         <h4>Project Details Overview</h4>
       </knit-project-details-table>
     </article>

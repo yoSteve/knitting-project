@@ -6,6 +6,8 @@ import { Store, Select } from '@ngxs/store';
 import { UpdateProject, SetCurrentProject } from '../state/project.action';
 import { Observable } from 'rxjs';
 import { ProjectState } from '../state/project.state';
+import { UserState } from '@app/user/state/user.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-edit-project',
@@ -15,6 +17,7 @@ import { ProjectState } from '../state/project.state';
 export class EditProjectComponent implements OnInit {
   title = 'Edit Project';
   @Select(ProjectState.currentProject) project$: Observable<Project>;
+  @Select(UserState.projectOwner) owner$: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,

@@ -12,14 +12,7 @@ export class DetailsTableComponent {
   @Input() project: Project;
   @Input() owner: User;
 
-  constructor(private helpers: HelpersService) {
-    // TODO: Update this after implementing UserService
-    this.owner = {
-      id: 'user1',
-      name: 'Steve Dev',
-      email: 'steve.yorke@gmail.com'
-    };
-  }
+  constructor(private helpers: HelpersService) { }
 
   get guage(): Guage {
     return this.project.guage;

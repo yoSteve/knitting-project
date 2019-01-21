@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, delay, combineLatest, take } from 'rxjs/operators';
+import { map, delay, combineLatest, take, switchMap, tap } from 'rxjs/operators';
 import { Store, Select } from '@ngxs/store';
 import { ProjectState } from '../state/project.state';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Project } from '../state/project.type';
 import { SetCurrentProject } from '../state/project.action';
+import { UserState } from '@app/user/state/user.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-overview',
@@ -15,6 +17,7 @@ import { SetCurrentProject } from '../state/project.action';
 export class OverviewComponent implements OnInit {
   title = 'Project Details';
   @Select(ProjectState.currentProject) project$: Observable<Project>;
+  @Select(UserState.projectOwner) owner$: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,15 +29,16 @@ export class OverviewComponent implements OnInit {
     this.route.params
       .pipe(
         map(params => params.id),
-        combineLatest(this.project$),
+        combineLatest(this.project$, this.owner$),
         take(1),
+        switchMap(([id, project]) => {
+          return !project || id !== project.id
+            ? this.store.dispatch(new SetCurrentProject(id))
+            : of(project);
+        }),
         delay(600)
       )
-      .subscribe(([id, project]) => {
-        if (!project || id !== project.id) {
-          this.store.dispatch(new SetCurrentProject(id));
-        }
-      });
+      .subscribe();
   }
 
   onNavigate(route: string) {

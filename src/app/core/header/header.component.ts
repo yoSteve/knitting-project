@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit() {
+    this.signInAs('user1');
   }
 
   signInAs(userId: string) {
