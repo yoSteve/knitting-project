@@ -1,37 +1,33 @@
 import { Injectable } from '@angular/core';
-import { PROJECTS } from '@app/_data/project.data';
-import { Project } from './project.type';
+import { Project } from './state/project.type';
 import { NEEDLE_SIZES } from '@app/_data/needle-sizes.data';
-import { Defaults, LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { LOPI_DEFAULTS } from '@app/_data/defaults-lopi.data';
+import { Observable, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment as ENV } from '@environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   private url = `${ENV.databaseUrl}/projects`;
-  public project$ = new BehaviorSubject(null);
-  public project: Project;
-  projects: Project[] = PROJECTS;
-  needles: any[] = NEEDLE_SIZES;
+  private _needles: any[] = NEEDLE_SIZES;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  getProject(id): void {
-    this.http.get<Project>(`${this.url}/${id}`).pipe(
-        catchError(err => {
-          console.error('getProject failed.', err.message);
-          return of(err);
-        })
-      )
-      .subscribe(data => {
-        this.project = data;
-        this.project$.next(data);
-      });
+  get needles(): Observable<any[]> {
+    return of(this._needles);
+  }
+
+  getProject(id: string): Observable<Project> {
+    return this.http.get<Project>(`${this.url}/${id}`).pipe(
+      catchError(err => {
+        console.error('getProject failed.', err.message);
+        return of(err);
+      })
+    );
   }
 
   getProjects(): Observable<Project[]> {
@@ -61,7 +57,7 @@ export class ProjectService {
     );
   }
 
-  deleteProject(id): Observable<any> {
+  deleteProject(id: string): Observable<any> {
     return this.http.delete<Project>(`${this.url}/${id}`).pipe(
       catchError(err => {
         console.error('addProject failed.', err.message);
@@ -70,21 +66,18 @@ export class ProjectService {
     );
   }
 
-  getDefaultProject(type): Observable<Project> {
-    // switch (type) {
-    //   case 'lopi':
-    return of({
-      id: null,
-      name: 'My Sweater',
-      is_metric: true,
-      guage: LOPI_DEFAULTS.guage,
-      measurements: LOPI_DEFAULTS.measurements
-    });
-    // }
-  }
-
-  getNeedles(): Observable<any[]> {
-    return of(this.needles);
+  getDefaultProject(type: string = 'lopi'): Observable<Project> {
+    switch (type) {
+      case 'lopi':
+        return of({
+          id: null,
+          owner_id: null,
+          name: 'My Sweater',
+          is_metric: true,
+          guage: LOPI_DEFAULTS.guage,
+          measurements: LOPI_DEFAULTS.measurements
+        });
+    }
   }
 
   buildProjectForm(project: Project): FormGroup {

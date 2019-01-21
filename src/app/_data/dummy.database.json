@@ -1,8 +1,21 @@
 {
+  "users": [
+    {
+      "id": "user1",
+      "name": "Steve",
+      "email": "steve.yorke@gmail.com"
+    },
+    {
+      "id": "user2",
+      "name": "Will Riker",
+      "email": "wriker@uss.enterprise"
+    }
+  ],
   "projects": [
     {
       "id": "prj000",
-      "name": "Dummy Sweater One, Bro",
+      "owner_id": "user1",
+      "name": "Dummy Sweater One",
       "is_metric": true,
       "guage": {
         "custom_guage": false,
@@ -40,7 +53,8 @@
     },
     {
       "id": "prj001",
-      "name": "Dummy Sweater Two",
+      "owner_id": "user2",
+      "name": "Riker's Sweater",
       "is_metric": false,
       "guage": {
         "custom_guage": false,
@@ -64,6 +78,59 @@
         ],
         "sleeve": [
           54
+        ]
+      }
+    },
+    {
+      "id": "9DYl3f0",
+      "owner_id": "user1",
+      "name": "My Sweater is Cool...?",
+      "is_metric": true,
+      "guage": {
+        "custom_guage": false,
+        "needles": [
+          4.5,
+          7,
+          7
+        ],
+        "width": 10,
+        "height": 10,
+        "stitches": 18,
+        "rows": 24
+      },
+      "measurements": {
+        "is_standard": true,
+        "chest": [
+          80,
+          89,
+          89,
+          98,
+          107,
+          115
+        ],
+        "torso": [
+          34,
+          38,
+          38,
+          40,
+          42,
+          44,
+          41,
+          43,
+          45,
+          47
+        ],
+        "sleeve": [
+          38,
+          42,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53
         ]
       }
     }

@@ -1,11 +1,11 @@
 <div class="grid-container">
-  <knit-header [title]="title"></knit-header>
+  <knit-header [title]="title$ | async"></knit-header>
 
   <main>
     <router-outlet></router-outlet>
   </main>
 
-  <knit-footer [title]="title" [author]="author" [githubURL]="githubURL" [instagramURL]="instagramURL" [twitterURL]="twitterURL"
+  <knit-footer [title]="title$ | async" [author]="author" [githubURL]="githubURL" [instagramURL]="instagramURL" [twitterURL]="twitterURL"
     [year]="year">
   </knit-footer>
   

@@ -1,16 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { Project, Guage, Measurements } from '../../project.type';
+import { Project, Guage, Measurements } from '../../state/project.type';
 import { HelpersService } from '@app/shared/services/helpers.service';
+import { User } from '@app/user/state/user.type';
 
 @Component({
-  selector: 'knit-details-table',
+  selector: 'knit-project-details-table',
   templateUrl: './details-table.component.html',
   styleUrls: ['./details-table.component.scss']
 })
 export class DetailsTableComponent {
   @Input() project: Project;
+  @Input() owner: User;
 
-  constructor(private helpers: HelpersService) {}
+  constructor(private helpers: HelpersService) { }
 
   get guage(): Guage {
     return this.project.guage;

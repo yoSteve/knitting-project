@@ -1,44 +1,54 @@
-<article>
+<article *ngIf="project; else loading">
   <ng-content></ng-content>
 
   <h3>{{ project.name }}</h3>
   <ul class="list-group">
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
+      Project Owner: 
+      <strong>{{ owner?.name }}</strong>
+    </li>
+    <li class="list-group-item">
       Units of measurment:
       <strong>{{ project.is_metric ? 'cm' : 'inches' }}</strong>
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Needles Size:
       <strong
         >{{ needles[0] }}mm ({{ needles[1] }} US / {{ needles[2] }} UK)</strong
       >
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Swatch:
       <strong
         >{{ project.is_metric ? '10 cm' : '4 inches' }} x
         {{ project.is_metric ? '10 cm' : '4 inches' }}</strong
       >
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Guage:
       <strong
         >{{ guage.stitches }} stitches across {{ guage.rows }} rows</strong
       >
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Custom or Standard Measurements:
       <strong>{{ measurements.is_standard ? 'Standard' : 'Custom ' }}</strong>
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Chest Measurements: <strong>{{ getMeasurements('chest') }}</strong>
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Torso Length Measurements: <strong>{{ getMeasurements('torso') }}</strong>
     </li>
-    <li class="list-group-item justify-content-between align-items-center">
+    <li class="list-group-item">
       Sleeve Length Measurements:
       <strong>{{ getMeasurements('sleeve') }}</strong>
     </li>
   </ul>
 </article>
+
+<ng-template #loading>
+  <div class="loading">
+    <h3>Loading...</h3>
+  </div>
+</ng-template>

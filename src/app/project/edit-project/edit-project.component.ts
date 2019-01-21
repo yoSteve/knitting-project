@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, combineLatest, delay, take } from 'rxjs/operators';
+import { Store, Select } from '@ngxs/store';
+import { UpdateProject, SetCurrentProject } from '../state/project.action';
+import { Observable } from 'rxjs';
+import { ProjectState } from '../state/project.state';
+import { UserState } from '@app/user/state/user.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-edit-project',
@@ -11,38 +16,40 @@ import { map } from 'rxjs/operators';
 })
 export class EditProjectComponent implements OnInit {
   title = 'Edit Project';
-  project$ = this.projectService.project$;
+  @Select(ProjectState.currentProject) project$: Observable<Project>;
+  @Select(UserState.projectOwner) owner$: Observable<User>;
 
-  constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.route.params
       .pipe(
-        map(params => params.id)
+        map(params => params.id),
+        combineLatest(this.project$),
+        take(1),
+        delay(600)
       )
-      .subscribe(id => {
-        if (!this.projectService.project || id !== this.projectService.project.id) {
-          this.projectService.getProject(id);
+      .subscribe(([id, project]) => {
+        if (!project || id !== project.id) {
+          this.store.dispatch(new SetCurrentProject(id));
         }
       });
   }
 
-  onValueChanges(project: Project): void {
-    this.project$.next(project);
+  onSave(project: Project) {
+    this.store.dispatch([
+      new UpdateProject(project),
+      new SetCurrentProject(project.id)
+    ]);
   }
 
-  onSave(project: Project): void {
-    console.log('save clicked!', project);
-    this.projectService.updateProject(project)
-      .subscribe(updatedProject => {
-        console.log('updated: ', updatedProject);
-      });
-  }
-
-  onCancel(): void {
+  onCancel() {
     console.log('cancel clicked!');
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-
-}
+} // end class

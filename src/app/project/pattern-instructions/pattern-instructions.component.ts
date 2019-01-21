@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../project.type';
-import { ProjectService } from '../project.service';
-import { tap } from 'rxjs/operators';
+import { Project } from '../state/project.type';
+import { Select } from '@ngxs/store';
+import { ProjectState } from '../state/project.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'knit-pattern-instructions',
@@ -10,7 +11,7 @@ import { tap } from 'rxjs/operators';
 })
 export class PatternInstructionsComponent implements OnInit {
   project_id;
-  project$ = this.projectService.project$;
+  @Select(ProjectState.currentProject) project$: Observable<Project>;
   mainNeedle = []; // defined
   cuffNeedle = '**TBD**';
   bodyCastOn = '**TBD**';
@@ -39,7 +40,7 @@ export class PatternInstructionsComponent implements OnInit {
   collarDecreases = '**TBD**';
   collarStitches = '**TBD**';
 
-  constructor(private projectService: ProjectService) { }
+  constructor() { }
 
   ngOnInit() {
   }

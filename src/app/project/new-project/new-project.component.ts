@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { Project } from '../project.type';
+import { Project } from '../state/project.type';
 import { take, delay } from 'rxjs/operators';
+import { Store, Select } from '@ngxs/store';
+import { AddProject } from '../state/project.action';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserState } from '@app/user/state/user.state';
+import { User } from '@app/user/state/user.type';
 
 @Component({
   selector: 'knit-new-project',
@@ -11,8 +17,13 @@ import { take, delay } from 'rxjs/operators';
 export class NewProjectComponent implements OnInit {
   title: 'New Project';
   project: Project;
+  @Select(UserState.currentUser) currentUser$: Observable<User>;
 
-  constructor(private projectService: ProjectService) { }
+  constructor(
+    private projectService: ProjectService,
+    private store: Store,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.projectService.getDefaultProject('lopi')
@@ -25,20 +36,12 @@ export class NewProjectComponent implements OnInit {
       });
   }
 
-  onValueChanges(project: Project): void {
-    this.project = project;
-  }
-
   onSave(project: Project) {
-    console.log('save clicked!', project);
-    this.projectService.addProject(project)
-      .subscribe(newProject => {
-        console.log('saved!', newProject);
-      });
+    this.store.dispatch(new AddProject(project));
   }
 
   onCancel() {
-    console.log('cancel clicked!');
+    this.router.navigate(['..', 'projects']);
   }
 
 } // end class

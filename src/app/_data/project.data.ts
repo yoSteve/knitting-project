@@ -1,8 +1,9 @@
-import { Project } from '@app/project/project.type';
+import { Project } from '@app/project/state/project.type';
 
 export const PROJECTS: Project[] = [
   {
     id: 'prj000',
+    owner_id: 'user1',
     name: 'Standard Sweater',
     is_metric: true,
     guage: {
@@ -23,6 +24,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'prj001',
+    owner_id: 'user1',
     name: 'Custom Sweater',
     is_metric: false,
     guage: {

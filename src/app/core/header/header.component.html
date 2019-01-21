@@ -5,4 +5,5 @@
       <a class="nav-link" [routerLink]="[route.route]">{{ route.name }}</a>
     </li>
   </ul>
+  <knit-current-user [user]="currentUser$ | async" (changeUser)="signInAs($event)"></knit-current-user>
 </header>

@@ -1,6 +1,6 @@
 export interface Project {
   id: string;
-  // user_id;
+  owner_id: string;
   // cuff_id;
   // yoke_id;
   name: string;

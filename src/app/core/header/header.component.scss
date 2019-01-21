@@ -5,10 +5,12 @@
 header {
   @extend %container;
   display: grid;
-  // grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: auto 4fr 1fr;
+  grid-gap: 1rem;
+  justify-items: flex-end;
+  align-items: center;
   background-color: $primary;
   color: $white;
-  justify-content: flex-start;
 
   h1 {
     margin-bottom: 0;
@@ -16,7 +18,7 @@ header {
   }
 
   ul {
-    @include flex(row, space-evenly);
+    @include flex(row, flex-end);
     grid-column: 2;
     margin-left: 1.5rem;
   }

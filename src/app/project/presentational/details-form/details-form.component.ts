@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../../project.service';
 import { Observable } from 'rxjs';
-import { Project } from '@app/project/project.type';
+import { Project } from '@app/project/state/project.type';
 
 @Component({
-  selector: 'knit-details-form',
+  selector: 'knit-project-details-form',
   templateUrl: './details-form.component.html',
   styleUrls: ['./details-form.component.scss']
 })
@@ -21,7 +21,7 @@ export class DetailsFormComponent implements OnInit {
     private projectService: ProjectService) {}
 
   ngOnInit() {
-    this.needles = this.projectService.getNeedles();
+    this.needles = this.projectService.needles;
     this.form = this.projectService.buildProjectForm(this.project);
     this.is_standard.valueChanges
       .subscribe(value => this.onStandardChanges(value));

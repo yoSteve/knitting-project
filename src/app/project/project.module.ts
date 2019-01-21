@@ -11,6 +11,9 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { OverviewComponent } from './overview/overview.component';
 import { EditProjectComponent } from './edit-project/edit-project.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
+import { NgxsModule } from '@ngxs/store';
+import { ProjectState } from './state/project.state';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,11 @@ import { ListProjectsComponent } from './list-projects/list-projects.component';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ProjectRoutingModule
+    ProjectRoutingModule,
+    NgxsModule.forFeature([ProjectState])
   ]
 })
 export class ProjectModule {}
