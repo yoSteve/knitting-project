@@ -6,20 +6,20 @@ import { ProjectService } from '../../project.service';
 
 const fb = new FormBuilder();
 
-xdescribe('DetailsFormComponent', () => {
-  let component: DetailsFormComponent;
-  let projectService: ProjectService;
+// xdescribe('DetailsFormComponent', () => {
+//   let component: DetailsFormComponent;
+//   let projectService: ProjectService;
 
-  beforeEach(() => {
-    projectService = new ProjectService(fb);
-    component = new DetailsFormComponent(projectService);
-  });
+//   beforeEach(() => {
+//     projectService = new ProjectService(fb);
+//     component = new DetailsFormComponent(projectService);
+//   });
 
-  afterEach(() => {
-    component = null;
-  });
+//   afterEach(() => {
+//     component = null;
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
