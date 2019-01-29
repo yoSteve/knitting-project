@@ -17,7 +17,7 @@ export class ProjectService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  get needles(): Observable<any[]> {
+  get needles$(): Observable<any[]> {
     return of(this._needles);
   }
 

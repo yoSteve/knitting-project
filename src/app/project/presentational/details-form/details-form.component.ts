@@ -21,7 +21,7 @@ export class DetailsFormComponent implements OnInit {
     private projectService: ProjectService) {}
 
   ngOnInit() {
-    this.needles = this.projectService.needles;
+    this.needles = this.projectService.needles$;
     this.form = this.projectService.buildProjectForm(this.project);
     this.is_standard.valueChanges
       .subscribe(value => this.onStandardChanges(value));
