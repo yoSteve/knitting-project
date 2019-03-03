@@ -11,8 +11,12 @@ const routes: Routes = [
     loadChildren: './project/project.module#ProjectModule',
   },
   {
-    path: '',
+    path: 'patterns',
     loadChildren: './pattern/pattern.module#PatternModule',
+  },
+  {
+    path: '',
+    loadChildren: './landing-page/landing-page.module#LandingPageModule',
     pathMatch: 'full'
   },
   {

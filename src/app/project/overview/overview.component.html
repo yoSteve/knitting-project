@@ -6,6 +6,6 @@
   </knit-project-details-table>
 
   <div class="actions-container">
-    <button class="btn btn-primary" type="button" (click)="onNavigate('print')">View Instructions</button>
-    <button class="btn btn-secondary" type="button" (click)="onNavigate('edit')">Edit</button>
+    <a [routerLink]="[ '/patterns', projectId, 'view' ]" class="btn btn-primary">View Instructions</a>
+    <a routerLink="./edit" class="btn btn-primary">Edit</a>
   </div>

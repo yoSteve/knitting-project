@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, delay, combineLatest, take, switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { map, delay, take, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Store, Select } from '@ngxs/store';
 import { ProjectState } from '../state/project.state';
 import { Observable, of } from 'rxjs';
@@ -16,12 +16,12 @@ import { User } from '@app/user/state/user.type';
 })
 export class OverviewComponent implements OnInit {
   title = 'Project Details';
+  projectId: string;
   @Select(ProjectState.currentProject) project$: Observable<Project>;
   @Select(UserState.projectOwner) owner$: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private store: Store
   ) {}
 
@@ -29,7 +29,8 @@ export class OverviewComponent implements OnInit {
     this.route.params
       .pipe(
         map(params => params.id),
-        combineLatest(this.project$, this.owner$),
+        tap(id => this.projectId = id),
+        withLatestFrom(this.project$),
         take(1),
         switchMap(([id, project]) => {
           return !project || id !== project.id
@@ -41,7 +42,4 @@ export class OverviewComponent implements OnInit {
       .subscribe();
   }
 
-  onNavigate(route: string) {
-    this.router.navigate([route], { relativeTo: this.route });
-  }
 } // end class

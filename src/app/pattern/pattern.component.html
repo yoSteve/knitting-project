@@ -1,2 +1,10 @@
 
-<knit-lopi *ngIf="project.type === 'lopi'" [project]="project"></knit-lopi>
+  <ng-container *ngIf="project$ | async as project; else loading">
+    
+    <knit-lopi *ngIf="project.type === 'lopi'" [project]="project"></knit-lopi>
+    
+  </ng-container>
+
+  <ng-template #loading>
+    <h2>Loading...</h2>
+  </ng-template>
