@@ -74,6 +74,7 @@ export class ProjectService {
           owner_id: null,
           name: 'My Sweater',
           is_metric: true,
+          type: 'lopi',
           guage: LOPI_DEFAULTS.guage,
           measurements: LOPI_DEFAULTS.measurements
         });

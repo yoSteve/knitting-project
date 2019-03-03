@@ -3,6 +3,7 @@ export interface Project {
   owner_id: string;
   // cuff_id;
   // yoke_id;
+  type: string;
   name: string;
   is_metric: boolean;
   guage: Guage;

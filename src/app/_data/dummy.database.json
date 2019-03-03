@@ -17,6 +17,7 @@
       "owner_id": "user1",
       "name": "Dummy Sweater One",
       "is_metric": true,
+      "type": "lopi",
       "guage": {
         "custom_guage": false,
         "needles": [
@@ -56,6 +57,7 @@
       "owner_id": "user2",
       "name": "Riker's Sweater",
       "is_metric": false,
+      "type": "lopi",
       "guage": {
         "custom_guage": false,
         "needles": [
@@ -86,6 +88,7 @@
       "owner_id": "user1",
       "name": "My Sweater is Cool...?",
       "is_metric": true,
+      "type": "lopi",
       "guage": {
         "custom_guage": false,
         "needles": [
