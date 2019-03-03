@@ -6,6 +6,7 @@ export const PROJECTS: Project[] = [
     owner_id: 'user1',
     name: 'Standard Sweater',
     is_metric: true,
+    type: 'lopi',
     guage: {
       custom_guage: false,
       needles: [4, 7, 7],
@@ -27,6 +28,7 @@ export const PROJECTS: Project[] = [
     owner_id: 'user1',
     name: 'Custom Sweater',
     is_metric: false,
+    type: 'lopi',
     guage: {
       custom_guage: false,
       needles: [5, 8, 6],

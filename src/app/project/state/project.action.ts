@@ -6,20 +6,20 @@ export class GetProjects {
 
 export class SetCurrentProject {
   static readonly type = '[Project] Set Current';
-  constructor(public payload: string) { }
+  constructor(public id: string) { }
 }
 
 export class AddProject {
   static readonly type = '[Project] Add Project';
-  constructor(public payload: Project) {}
+  constructor(public project: Project) {}
 }
 
 export class UpdateProject {
   static readonly type = '[Project] Update Project';
-  constructor(public payload: Project) {}
+  constructor(public project: Project) {}
 }
 
 export class RemoveProject {
   static readonly type = '[Project] Remove Project';
-  constructor(public payload: string) {}
+  constructor(public id: string) {}
 }

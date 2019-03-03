@@ -4,6 +4,7 @@ import { AddProject, GetProjects, RemoveProject, UpdateProject, SetCurrentProjec
 import { ProjectService } from '../project.service';
 import { tap } from 'rxjs/operators';
 import { SetProjectOwner } from '@app/user/state/user.actions';
+import { of } from 'rxjs';
 
 export class ProjectStateModel {
   readonly projects: Project[];
@@ -30,27 +31,31 @@ export class ProjectState implements NgxsOnInit {
     return state.currentProject;
   }
 
-  ngxsOnInit(context: StateContext<ProjectStateModel>) {
-    context.dispatch(new GetProjects());
+  ngxsOnInit(ctx: StateContext<ProjectStateModel>) {
+    ctx.dispatch(new GetProjects());
   }
 
   @Action(GetProjects)
-  getAll({ patchState }: StateContext<ProjectStateModel>) {
+  getAll(ctx: StateContext<ProjectStateModel>) {
     return this.projectService.getProjects()
       .pipe(
-        tap(projects => patchState({ projects }))
+        tap(projects => ctx.patchState({ projects }))
       );
   }
 
   @Action(SetCurrentProject)
   setCurrent(
-    { patchState }: StateContext<ProjectStateModel>,
-    { payload }: SetCurrentProject
+    ctx: StateContext<ProjectStateModel>,
+    payload: SetCurrentProject
   ) {
-    return this.projectService.getProject(payload)
+    const state = ctx.getState();
+    if (state.currentProject && state.currentProject.id === payload.id) {
+      return of(state.currentProject.id);
+    }
+    return this.projectService.getProject(payload.id)
       .pipe(
         tap(foundProject => {
-          patchState({ currentProject: foundProject });
+          ctx.patchState({ currentProject: foundProject });
           this.store.dispatch(new SetProjectOwner(foundProject.owner_id));
         })
       );
@@ -58,14 +63,14 @@ export class ProjectState implements NgxsOnInit {
 
   @Action(AddProject)
   add(
-    { getState, patchState }: StateContext<ProjectStateModel>,
-    { payload }: AddProject
+    ctx: StateContext<ProjectStateModel>,
+    payload: AddProject
   ) {
-    return this.projectService.addProject(payload)
+    return this.projectService.addProject(payload.project)
       .pipe(
         tap(newProject => {
-          const state = getState();
-          patchState({
+          const state = ctx.getState();
+          ctx.patchState({
             currentProject: newProject,
             projects: [...state.projects, newProject]
           });
@@ -75,16 +80,16 @@ export class ProjectState implements NgxsOnInit {
 
   @Action(UpdateProject)
   update(
-    { getState, patchState }: StateContext<ProjectStateModel>,
-    { payload }: UpdateProject
+    ctx: StateContext<ProjectStateModel>,
+    payload: UpdateProject
   ) {
-    return this.projectService.updateProject(payload)
+    return this.projectService.updateProject(payload.project)
       .pipe(
         tap(updatedProject => {
-          const updated = getState().projects.map(project => {
-            return project.id === payload.id ? payload : project;
+          const updated = ctx.getState().projects.map(project => {
+            return project.id === payload.project.id ? payload.project : project;
           });
-          patchState({
+          ctx.patchState({
             currentProject: updatedProject,
             projects: [...updated]
           });
@@ -94,16 +99,16 @@ export class ProjectState implements NgxsOnInit {
 
   @Action(RemoveProject)
   delete(
-    { getState, patchState }: StateContext<ProjectStateModel>,
-    { payload }: RemoveProject
+    ctx: StateContext<ProjectStateModel>,
+    payload: RemoveProject
   ) {
-    return this.projectService.deleteProject(payload)
+    return this.projectService.deleteProject(payload.id)
       .pipe(
         tap(() => {
-          const filtered = getState().projects.filter(project => project.id !== payload);
-          const current = getState().currentProject;
-          patchState({
-            currentProject: current.id === payload ? null : current,
+          const filtered = ctx.getState().projects.filter(project => project.id !== payload.id);
+          const current = ctx.getState().currentProject;
+          ctx.patchState({
+            currentProject: current.id === payload.id ? null : current,
             projects: [...filtered]
           });
         })
