@@ -12,6 +12,11 @@ const routes: Routes = [
   },
   {
     path: '',
+    loadChildren: './pattern/pattern.module#PatternModule',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     loadChildren: './landing-page/landing-page.module#LandingPageModule',
     pathMatch: 'full'
   },
