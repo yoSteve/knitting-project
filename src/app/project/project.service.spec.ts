@@ -37,23 +37,7 @@ describe('ProjectService', () => {
     service = null;
   });
 
-  describe('#getProject', () => {
-    it('should return an Observable of a Project', async () => {
-      spyOn(service, 'getProject').and.returnValue(of(dummyProject));
-      service.getProject('id').subscribe(result => {
-        expect(result).toBeTruthy();
-      });
-    });
-
-    it('project should have name "dummy sweater"', async () => {
-      spyOn(service, 'getProject').and.returnValue(of(dummyProject));
-      service.getProject('id').subscribe(result => {
-        const name = result.name.toLowerCase();
-        expect(name).toBe('dummy sweater');
-      });
-    });
-  });
-
+  // TODO: test that it returns a lopi type sweater
   describe('#getDefaultProject', () => {
     it('should return an Observable of a Project', async () => {
       service.getDefaultProject('lopi').subscribe(result => {
@@ -73,24 +57,4 @@ describe('ProjectService', () => {
     });
   });
 
-  describe('#getNeedles', () => {
-    it('should return an Observable of Arrays', async() => {
-      service.needles$.subscribe(results => {
-        expect(results).toBeArray();
-      });
-    });
-  });
-
-  describe('#buildProjectForm', () => {
-    it('given a project, it should return a FormGroup', async() => {
-      const form = service.buildProjectForm(dummyProject);
-      const name = form.get('name').value;
-      const guageStitches = form.get('guage').get('stitches').value;
-      const chestMeasurements = form.get('measurements').get('chest').value;
-      expect(form).toBeTruthy();
-      expect(name.toLowerCase()).toBe('dummy sweater');
-      expect(guageStitches).toBe(18);
-      expect(chestMeasurements).toContain(89);
-    });
-  });
 });
