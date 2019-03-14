@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -16,17 +18,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: './landing-page/landing-page.module#LandingPageModule',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    loadChildren: './landing-page/landing-page.module#LandingPageModule',
+    component: LandingPageComponent,
     pathMatch: 'full'
   },
   {
     path: '**',
-    loadChildren: './not-found/not-found.module#NotFoundModule'
+    component: NotFoundComponent
   }
 ];
 
